@@ -1,0 +1,2 @@
+// Function Scope
+// Block Scope
