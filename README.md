@@ -7,7 +7,7 @@ Lecture : https://www.udemy.com/course/clean-code-js/
 
 <br />
 
-더 자세한 설명은 Notion : https://root-dugout-9ef.notion.site/CleanCode-Javascript-7f2e1a0a443d4e719e05aeefb7ba244f
+[더 자세한 설명이 있는 Notion](https://root-dugout-9ef.notion.site/CleanCode-Javascript-7f2e1a0a443d4e719e05aeefb7ba244f)
 
 # Section 1. About Variable
 
