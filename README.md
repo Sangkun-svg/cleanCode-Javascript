@@ -267,65 +267,137 @@ let 과 const 도 호이스팅이 일어나는데 왜 undefined 가 아닌 Error
 
 # Section 2. Type Handling
 
-`type check(타입 체크)`
+Summary
 
-타입 검사는 typeof
+- Type of Javascript & Type checking
+- undefined & null
+- unused `Loosely Equality Operator` & use `Strict Equality Operator`
+- beware of `Type Casting`
+- about `isNaN` function
 
-typeof 연산자는 피연산자를 평가해서 문자열로 값을 반환하는 특징이 있다.
+<br />
 
-단점
+## `JS의 타입과 타입 검사`
 
-- typeof 로 모든 검사를 할수 있지 않다. 참조형은 typeof 로 감별해내기가 어렵다.
-- typeof null 이 문제임 ! obj 타입으로 나옴. -> 언어적인 오류임
+JavaScript 에서의 타입
 
-JS의 타입 분류
+- Javascript 는 느슨한 타입의 동적인 언어이다.
+- Javascript 의 변수는 어떤 특정 타입과 연결되지 않으며 , 모든 타입의 값으로 할당 및 재할당이 가능하다.
+- 변수에 값을 할당하면 JS 엔진은 해당 값이 원시값인지 참조값인지 판단한다.
 
-- Primitive(원시값 = 불변 => typeof 연산자로 감별해내기 쉽다.) VS Reference(참조형 = 가변 array ,function , data , ...)
-- JS는 동적인 언어이므로 타입까지 동적이여서 타입 검사에 주의를 해야함
+<br />
 
-instanceof 연산자 : 객체의 프로토타입 체인을 검사함
+`타입 종류`
 
-- 단점
-  - 레퍼런스 타입이기 때문에 최상위는 무조건 Object임
-  - 프로토 타입을 타게 되면 최상위는 무조건 Object임
+- JS 언어의 타입은 `원시값`과 `객체(참조값)` 으로 나뉩니다.
 
-Tip
+  - `원시값`
 
-- type 검사 키워드 = javascript is [Function , Array , String , anythings ...] ,
+    - 언어의 **최고 로우레벨**에서 직접 표현되는 **불변** 데이터이다.
+    - 객체를 제외한 모든 타입을 불변값(원시값)으로 정의합니다.
+    - 예시로는 `Boolean` , `Null` , `Undefined` , `Number` , `BigInt` , `String` , `Symbol` 등 의 타입들이 존재한다.
+
+  <br/>
+
+  - `객체(참조값)`
+    - 참조값은 여러 값으로 구성되는 메모리에 저장된 객체이다.
+      JS는 메모리 위치에 직접 접근하는것을 허용하지 않아 객체의 메모리 공간을 직접 조작하는것은 불가능하다.
+      객체를 조작할 때는 사실 객체 자체가 아니라 해당 객체에 대한 참조를 조작하는 것이다.
+      이런 이유로 객체를 가리키는 값은 **_“참조로 접근한다"_** 라고 말한다.
+
+<br />
+
+`타입 검사`
+
+- `typeof operator`
+
+  - typeof 연산자는 피연산자를 평가해서 문자열로 자료형을 반환한다.
+
+<br />
+
+- `instanceof operator`
+  - instanceof 연산자는 객체(생성자)의 prototype 속성이 객체의 prototype chain 어딘가에 존재하는지 판별합니다.
+  - prototype 의 최상위 객체는 Object 이다. 따라서 어떤 객체를 연산하든 prototype chain 을 타고 올라가보면 최상위 객체는 항상 Object 이기 때문에 타입 검사에 어려움이 생긴다.
+
+<br/><br/><br/>
+
+## `undefined & null`
+
+<br/>
 
 `undefined 와 null`
 
-undefined 와 null : 값이 없거나 정의되지 않은 것들
+- `undefeind`
+  - undefined 와 null 두 타입 모두 값이 없음을 나타낸다.
+  - 기본적으로 값이 할당되지 않은 변수는 undefined 타입이며 , undefined 타입은 변수 자체의 값 또한 undefined 이다.
+  - 즉 undefined 는 데이터 타입임과 동시에 값이라는 뜻이다.
 
-undefined
+<br/>
 
-- 변수를 초기화시 undefined 가 변수에 삽입되며 , 값이 할당되지 않으면 undefined 로 남아있는다.
-- typeof undefined === "undefined"
-- Number(undefined) === NaN(Not a Number)
+- `null`
 
-null
+  - null 은 명시적으로 값이 비어있음을 나타내는데 사용한다.
+  - **아무것도 참조하고 있지 않다** 라는 의미를 내포하고 있으며 , 주로 변수를 초기화 할 때 많이 사용한다.
+  - null 은 데이터 타입임과 동시에 값이다.
 
-- 명시적으로 값이 없다는걸 표현
-- typeof null === "Object"
-- Number(null) === 0
+    - `typeof Null`
 
-undefined 와 null 은 굉장히 혼잡한 개념이 많기 때문에 팀 혹은 개인 별 convention 을 정의해놓고 사용하면 혼란을 방지할 수 있다.
+      - null 은 undefined 와 유사하게 타입임과 동시에 값이다. 하지만 null 의 타입검사를 결과는 Object 이다. 이건 JS 에서 인정한 버그이다.
 
-`eqeq(동등 연산자) 줄이기`
+      ```jsx
+      typeof null; // result : Object
+      ```
 
-- == 은 type casting(형 변환) 이 일어나서 위험하다.
+      - 그렇다면 null 타입 체크는 어떻게 해야하는가?
 
-- === 은 strict equality 으로 엄격한 동등 연산자 라는 뜻을 지닌다.
-  엄격한 동등 연산자를 사용하묜 type casting 이 일어나지 않느다.
+        - null 은 타입과 값이 null 이니 타입을 비교하는게 아닌 변수 그 자체와 비교하면 될 것 같다.
 
-ESLint 를 활용하는 방법도 있음
+        ```jsx
+        const operand = null;
 
-`형 변환 주의하기`
+        console.log(operand === null); // result : true
+        ```
 
-JS는 암묵적으로 형변환을 하기 때문에 형변환을 할 땐 명시적으로 한다.
+- `Convention`
 
-`isNaN Function`
+  - undefined 와 null 은 혼잡한 개념이 많기 때문에 팀 혹은 개인 별 convention 을 정의해놓고 사용하면 혼란을 방지할 수 있다.
+  - 임의로 생성해보는 컨벤션
 
-isNaN() 혹은 Number.isNaN() 은 어떤값이 NaN인지 , 즉 어떤값이 숫자가 아닌지 판별하는 함수이다.
+  ```jsx
 
-Number.isNaN() 은 isNaN()의 엄격한 모드(strict mode) 이다.
+  ```
+
+<br/><br/><br/>
+
+## `엄격한 동등 연산자(일치 연산자) 사용하기`
+
+JS 에서 동등 연산자는 2가지가 존재한다
+
+`동등 연산자`와 `엄격한 동등 연산자(일치 연산자)` 이다.
+
+- Equality Operator ( == )
+
+  - 동등 연산자는 두개의 피연산자의 값이 동일한지 확인하며 , 결과값을 Boolean 타입으로 반환합니다.
+  - 엄격한 동등 연산자(일치 연산자) 와는 다르게 다른 타입의 피연산자들 끼리 비교가 가능하며 , 비교과정에서 형 변환(type casting) 이 일어날 수 있습니다.
+
+    - 타입캐스팅이 일어나면서 예상하지 못한 결과가 나올 수 있다.
+
+      ```jsx
+      Ex.console.log(0 == false); // result : true
+
+      console.log("" == false); // result : true
+      ```
+
+  - 특징
+    - 두 피연산자가 모두 객체일 땐 , 두 피연산자가 동일한 객체를 참조할 때만 true 를 반환합니다.
+    - 하나의 피연산자가 null 이고 , 다른 하나의 피연산자가 undefined 일 때 true 를 반환합니다.
+
+- Strict Equality Operator ( === )
+
+  - 일치 연산자는 두개의 피연산자의 타입 & 값이 동일한지 확인하며 , 결과값으로 Boolean 타입으로 반환합니다.
+  - 동등 연산자와 다르게 형변환이 일어나지 않습니다.
+
+- 결론
+  - 동등 연산자를 사용하게 되면 JS 엔진이 암묵적으로 형 변환을 실행시켜 원하지 않는 결과를 초래할 수 있습니다. 따라서 엄격한 동등 연산자(일치 연산자)를 사용하고 필요 시 명시적으로 형 변환을 해주는 것을 추천드립니다.
+
+<br /><br /><br />
