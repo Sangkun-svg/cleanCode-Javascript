@@ -294,3 +294,19 @@ Tip
 - type 검사 키워드 = javascript is [Function , Array , String , anythings ...] ,
 
 `undefined 와 null`
+
+undefined 와 null : 값이 없거나 정의되지 않은 것들
+
+undefined
+
+- 변수를 초기화시 undefined 가 변수에 삽입되며 , 값이 할당되지 않으면 undefined 로 남아있는다.
+- typeof undefined === "undefined"
+- Number(undefined) === NaN(Not of Number)
+
+null
+
+- 명시적으로 값이 없다는걸 표현
+- typeof null === "Object"
+- Number(null) === 0
+
+undefined 와 null 은 굉장히 혼잡한 개념이 많기 때문에 팀 혹은 개인 별 convention 을 정의해놓고 사용하면 혼란을 방지할 수 있다.
