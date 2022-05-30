@@ -301,7 +301,7 @@ undefined
 
 - 변수를 초기화시 undefined 가 변수에 삽입되며 , 값이 할당되지 않으면 undefined 로 남아있는다.
 - typeof undefined === "undefined"
-- Number(undefined) === NaN(Not of Number)
+- Number(undefined) === NaN(Not a Number)
 
 null
 
@@ -323,3 +323,9 @@ ESLint 를 활용하는 방법도 있음
 `형 변환 주의하기`
 
 JS는 암묵적으로 형변환을 하기 때문에 형변환을 할 땐 명시적으로 한다.
+
+`isNaN Function`
+
+isNaN() 혹은 Number.isNaN() 은 어떤값이 NaN인지 , 즉 어떤값이 숫자가 아닌지 판별하는 함수이다.
+
+Number.isNaN() 은 isNaN()의 엄격한 모드(strict mode) 이다.
