@@ -310,3 +310,12 @@ null
 - Number(null) === 0
 
 undefined 와 null 은 굉장히 혼잡한 개념이 많기 때문에 팀 혹은 개인 별 convention 을 정의해놓고 사용하면 혼란을 방지할 수 있다.
+
+`eqeq(동등 연산자) 줄이기`
+
+- == 은 type casting(형 변환) 이 일어나서 위험하다.
+
+- === 은 strict equality 으로 엄격한 동등 연산자 라는 뜻을 지닌다.
+  엄격한 동등 연산자를 사용하묜 type casting 이 일어나지 않느다.
+
+ESLint 를 활용하는 방법도 있음
