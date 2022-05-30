@@ -262,3 +262,35 @@ let 과 const 도 호이스팅이 일어나는데 왜 undefined 가 아닌 Error
 
 - let 과 const 사용을 지향한다.
 - 함수 표현식을 지향한다.
+
+<br /><br /><br />
+
+# Section 2. Type Handling
+
+`type check(타입 체크)`
+
+타입 검사는 typeof
+
+typeof 연산자는 피연산자를 평가해서 문자열로 값을 반환하는 특징이 있다.
+
+단점
+
+- typeof 로 모든 검사를 할수 있지 않다. 참조형은 typeof 로 감별해내기가 어렵다.
+- typeof null 이 문제임 ! obj 타입으로 나옴. -> 언어적인 오류임
+
+JS의 타입 분류
+
+- Primitive(원시값 = 불변 => typeof 연산자로 감별해내기 쉽다.) VS Reference(참조형 = 가변 array ,function , data , ...)
+- JS는 동적인 언어이므로 타입까지 동적이여서 타입 검사에 주의를 해야함
+
+instanceof 연산자 : 객체의 프로토타입 체인을 검사함
+
+- 단점
+  - 레퍼런스 타입이기 때문에 최상위는 무조건 Object임
+  - 프로토 타입을 타게 되면 최상위는 무조건 Object임
+
+Tip
+
+- type 검사 키워드 = javascript is [Function , Array , String , anythings ...] ,
+
+`undefined 와 null`
