@@ -470,3 +470,11 @@ react hooks
 삼항연산자를 상ㅇ해서 값을 만들고 변수로 담아내거나 , 함수가 내뱉는 값이 바로 값을 내뱉는다면 사용함
 
 https://velog.io/@jangws/7.-%EC%82%BC%ED%95%AD%EC%97%B0%EC%82%B0%EC%9E%90-%EB%8B%A4%EB%A3%A8%EA%B8%B0
+
+## `Truthy & Falsy`
+
+Truthy : https://developer.mozilla.org/ko/docs/Glossary/Truthy
+
+Falsy : https://developer.mozilla.org/ko/docs/Glossary/Falsy
+
+굉장히 유용함
