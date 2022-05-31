@@ -478,3 +478,13 @@ Truthy : https://developer.mozilla.org/ko/docs/Glossary/Truthy
 Falsy : https://developer.mozilla.org/ko/docs/Glossary/Falsy
 
 굉장히 유용함
+
+## `단축평가 (short-circut evoluation)`
+
+단축평가란?
+
+OR operator 와 AND operator 의 단축평가
+
+논리연산자만 잘 사용해도 코드가 줄어들고 , 가독성이 높아진다.
+
+강의를 다시 보면서 코드 작성해보기
