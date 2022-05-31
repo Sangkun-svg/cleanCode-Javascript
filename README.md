@@ -454,3 +454,9 @@ react hooks
 - 만약 파라미터가 많아진다면 객체로 넘긴다
 
 클린코드에서의 매개변수 내용과 연관지어 기록하기
+
+# Section 4. Forked Handling
+
+## `값식문`
+
+[값식문에 대해 잘 정리된 velog](https://velog.io/@leebonggu12/JS%EB%B6%84%EA%B8%B0%EB%8B%A4%EB%A3%A8%EA%B8%B0%EA%B0%92%EC%8B%9D%EB%AC%B8)
