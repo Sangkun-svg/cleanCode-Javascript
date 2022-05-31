@@ -404,8 +404,6 @@ JS 에서 동등 연산자는 2가지가 존재한다
 
 # Section 3. Handling of boundaries
 
-## `Ex`
-
 ## `min - max`
 
 min 과 max 의 대한 경게가 애매할 수 있다
