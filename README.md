@@ -513,3 +513,7 @@ early return 을 사용하여 의존성을 끊을 수 있다.
 
 - early return 을 사용할 때
 - 보안 혹은 검사하는 로직일 때
+
+## `Default Case( Edge Case ) 고려하기`
+
+[엣지케이스에 관하여...](https://bakyeono.net/post/2015-05-02-edge-case-corner-case.html)
