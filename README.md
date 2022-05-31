@@ -454,3 +454,102 @@ react hooks
 - 만약 파라미터가 많아진다면 객체로 넘긴다
 
 클린코드에서의 매개변수 내용과 연관지어 기록하기
+
+# Section 4. Forked Handling
+
+## `값식문`
+
+[값식문에 대해 잘 정리된 velog](https://velog.io/@leebonggu12/JS%EB%B6%84%EA%B8%B0%EB%8B%A4%EB%A3%A8%EA%B8%B0%EA%B0%92%EC%8B%9D%EB%AC%B8)
+
+## `삼항연산자`
+
+삼항연산자를 사용할 땐 일관성이 중요하다고 생각
+
+삼항연산자는 3개의 피연산자를 필요로 한다
+
+삼항연산자를 상ㅇ해서 값을 만들고 변수로 담아내거나 , 함수가 내뱉는 값이 바로 값을 내뱉는다면 사용함
+
+https://velog.io/@jangws/7.-%EC%82%BC%ED%95%AD%EC%97%B0%EC%82%B0%EC%9E%90-%EB%8B%A4%EB%A3%A8%EA%B8%B0
+
+## `Truthy & Falsy`
+
+Truthy : https://developer.mozilla.org/ko/docs/Glossary/Truthy
+
+Falsy : https://developer.mozilla.org/ko/docs/Glossary/Falsy
+
+굉장히 유용함
+
+## `단축평가 (short-circut evoluation)`
+
+단축평가란?
+
+OR operator 와 AND operator 의 단축평가
+
+논리연산자만 잘 사용해도 코드가 줄어들고 , 가독성이 높아진다.
+
+강의를 다시 보면서 코드 작성해보기
+
+## `else / else if 피하기`
+
+else if 문을 사용하는 경우는 조건에 대해서 명확함이 없는 상황일 경우가 큼
+
+else if 를 최대한 지향하고 swich 문으로 변환하는걸 추천
+
+아니먄 if 블록으로 쪼개서 else if 를 사용하지 않는방법도 있음
+
+else 문을 한번만 사용할 경우는 사실 else에 필요도가 optional 한 경우이기 때문에 생략하여 가독성을 높이는걸 추천
+
+하나의 함수가 2가지의 기능을 할 때 else 문을 사용하면 원하지 않는 결과가 도출될 수 있다.
+
+## `Early Return 과 부정 조건문 지양(beware of condition statement of negate )`
+
+early return 을 사용하여 의존성을 끊을 수 있다.
+
+부정조건문을 지양하는 이유
+
+- 생각을 여러번 해야할 수 있다.
+
+부정조건은 언제 사용하나?
+
+- early return 을 사용할 때
+- 보안 혹은 검사하는 로직일 때
+
+## `Default Case( Edge Case ) 고려하기`
+
+[엣지케이스에 관하여...](https://bakyeono.net/post/2015-05-02-edge-case-corner-case.html)
+
+## `명시적인 연산자 사용 지향하기`
+
+예측 가능하고 디버깅 하기 쉬운 코드를 짜기 위해 노력하자
+
+분기처리를 작성할 때도 도움이 많이 된다.
+
+연산자의 우선순위를 잘 판단하기 위해 () 로 표기해주면 가독성을 높일 수 있다.
+
+전위 연산자와 후위 연산자도 지양하는것이 좋음
+
+## `Nullish coalescing operator( null 병합 연산자 )`
+
+정의 : null 과 undefined 만 필터링한다.
+단점 : falsy 와 nullish 중 어떠한것을 사용하용해야할 지 고민하지 않고 nullish operator 만 사용할 수도 있음.
+
+[MDN Nullish coalescing operator](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator)
+[Mordern Javascript Nullish coalescing operator](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator)
+
+주의점
+
+## `드모르간의 법칙`
+
+수학적인 표현식
+
+```
+not (A or B)=(not A) and (not B)
+not (A and B)=(not A) or (not B)
+```
+
+JS에서의 표현식
+
+```
+!(A || B) = !A && !B
+!(A and B) = !A || !B
+```
