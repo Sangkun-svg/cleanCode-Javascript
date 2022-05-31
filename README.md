@@ -537,3 +537,19 @@ early return 을 사용하여 의존성을 끊을 수 있다.
 [Mordern Javascript Nullish coalescing operator](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator)
 
 주의점
+
+## `드모르간의 법칙`
+
+수학적인 표현식
+
+```
+not (A or B)=(not A) and (not B)
+not (A and B)=(not A) or (not B)
+```
+
+JS에서의 표현식
+
+```
+!(A || B) = !A && !B
+!(A and B) = !A || !B
+```
