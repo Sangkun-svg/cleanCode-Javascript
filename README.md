@@ -527,3 +527,13 @@ early return 을 사용하여 의존성을 끊을 수 있다.
 연산자의 우선순위를 잘 판단하기 위해 () 로 표기해주면 가독성을 높일 수 있다.
 
 전위 연산자와 후위 연산자도 지양하는것이 좋음
+
+## `Nullish coalescing operator( null 병합 연산자 )`
+
+정의 : null 과 undefined 만 필터링한다.
+단점 : falsy 와 nullish 중 어떠한것을 사용하용해야할 지 고민하지 않고 nullish operator 만 사용할 수도 있음.
+
+[MDN Nullish coalescing operator](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator)
+[Mordern Javascript Nullish coalescing operator](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator)
+
+주의점
