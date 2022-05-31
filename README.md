@@ -500,3 +500,16 @@ else if 를 최대한 지향하고 swich 문으로 변환하는걸 추천
 else 문을 한번만 사용할 경우는 사실 else에 필요도가 optional 한 경우이기 때문에 생략하여 가독성을 높이는걸 추천
 
 하나의 함수가 2가지의 기능을 할 때 else 문을 사용하면 원하지 않는 결과가 도출될 수 있다.
+
+## `Early Return 과 부정 조건문 지양(beware of condition statement of negate )`
+
+early return 을 사용하여 의존성을 끊을 수 있다.
+
+부정조건문을 지양하는 이유
+
+- 생각을 여러번 해야할 수 있다.
+
+부정조건은 언제 사용하나?
+
+- early return 을 사용할 때
+- 보안 혹은 검사하는 로직일 때
