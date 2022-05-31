@@ -460,3 +460,13 @@ react hooks
 ## `값식문`
 
 [값식문에 대해 잘 정리된 velog](https://velog.io/@leebonggu12/JS%EB%B6%84%EA%B8%B0%EB%8B%A4%EB%A3%A8%EA%B8%B0%EA%B0%92%EC%8B%9D%EB%AC%B8)
+
+## `삼항연산자`
+
+삼항연산자를 사용할 땐 일관성이 중요하다고 생각
+
+삼항연산자는 3개의 피연산자를 필요로 한다
+
+삼항연산자를 상ㅇ해서 값을 만들고 변수로 담아내거나 , 함수가 내뱉는 값이 바로 값을 내뱉는다면 사용함
+
+https://velog.io/@jangws/7.-%EC%82%BC%ED%95%AD%EC%97%B0%EC%82%B0%EC%9E%90-%EB%8B%A4%EB%A3%A8%EA%B8%B0
