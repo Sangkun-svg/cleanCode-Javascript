@@ -404,56 +404,100 @@ JS 에서 동등 연산자는 2가지가 존재한다
 
 # Section 3. Handling of boundaries
 
-## `min - max`
+Summary
 
-min 과 max 의 대한 경게가 애매할 수 있다
+- min - max
+- begin - end
+- first - end
+- prefix - suffix
+- order of parameters
 
-= 최솟값 , 최대값이 포함되는지에 대한 경계가 애매할 수 있음;
+## `들어가기 전에 이 Section에 대한 고찰`
 
-min과 max 를 다룰 때 이상,이하로 다루는지 초과,미만으로 다루는지 정해놔야 한다.
+…
 
-혹은 네이밍에 값의 포함여부를 표현할 수 있는 컨벤션을 만드는것도 좋다
+## `Min & Max`
 
-- Ex.
+- min & max 의 대한 정의가 확실하지 않으면 혼란을 야기할 수 있다.
 
-  - 포함되는 경우: const MIN_IN_NUMBER
-  - 포함되지 않는 경우: const MIN_NUMBER_LIMIT
+  - Ex. 만약 팀원중 누군가는 최솟값을 n 이하로 코드를 작성하고 , 다른 누군가는 최솟값을 n 미만으로 작성한다면 동일한 서비스내에 값은 액션을 취해도 다른 결과값이 나오는 결과가 있을수 도 있다.
 
-## `begin - end`
+- min & max 의 대한 컨벤션
+  - 정해야하는 컨벤션(규칙)은 초과/미만 & 이상/이하 를 나누는것이다
+  - 강의내에선 변수를 선언할 때 네이밍을 다르게 하는것을 추천
+    - 초과 , 미만 : MIN_NUMBER_LIMiT , MAX_NUMBER_LIMiT
+    - 이상 , 이하 : MIN_IN_NUMBER , MAX_IN_NUMBER
+- 순차적으로 처리하는 함수가 있다면 min & max 가 명시적으로 유효성이 있다.
 
-이 강의가 전하고자 하는 내용을 이해하지 못했다.
+## `Begin & End`
 
-조금 더 찾아보고 다시 공부하여 수정해놓을것이다.
+- 고정된 초기값과 유동적인 마지막값인 파라미터들이 있다면 `min & max` 보단
+  `begin & end` 를 사용하는 걸 추천한다.
 
-## `first - last`
+- 비슷하다면 비슷한 개념인데 왜 다른 네이밍을 지향할까?
+  - 단순한 네이밍 변경만으로도 코드의 가독성을 올라가기 때문이다.
+  - 이미 많은 개발자들이 관습처럼 사용하고 있는 네이밍을 사용하여 가독성을 올릴수 있기 때문이다.
 
-순차적으로 처리하는 함수가 있다고 할 때 min-max 가 명시적으로 유효형이 있다.
+## `First & Last`
 
-연속성(규칙성)이 없는 데이터를 처리하는 함수가 있다면 first-last 의 사용을 고려할 수 있다.
+- 연속성(규칙성)이 없는 데이터를 처리하는 함수가 있다면 first-last 의 사용을 고려할 수 있다.
 
-## `prefix - suffix`
+## `Prefix & Suffix`
 
-함수 or 변수에 대한 네이밍 컨벤션에 대한 내용
+- 함수 혹은 변수의 네이밍을 할 땐 접두사(prefix) 와 접미사(suffix) 를 고려한다.
+  어떤 개발자들은 코드를 치는시간보다 네이밍에 시간을 더 쓴다고도 한다.
+- prefix 와 suffix 를 왜 고려해야 하는가?
 
-예시
+  - 대부분 코드를 볼때 보는것은 변수 or 함수의 이름이고 그 이름들을 가지고 어떤 역할을 하는지 추측한다. 그래서 변수와 함수의 네이밍이 굉장히 중요하다고 느낀다.
+    그리고 필자는 네이밍에 영향을 가장 많이 끼치는 부분이 접두사와 접미사라고 생각한다.
 
-getter setter
+- Prefix & Suffix 활용법
+  - 변수 : 명사 , 명사구 로 작성한다.
+  - 함수 : 동사 , 동사구 ,동사-목적어 패턴으로 작성한다.
+  - Prefix
+    - 같은 의미의 다른 접두사를 사용하는 것을 지양한다.
+    - 표준 접두사(standard Prefix)를 사용하다.
+    - Ex. `addUser - createUser` , `deleteUser - removeUser`
+  - Suffix
+    - 아직 생각나는 개념이 없다. 더 공부하고 채울것
 
-react hooks
+## `Order of parameters is boundaries`
 
-## `매개변수의 순서가 경계다`
+- 파라미터를 생성할 때 순서와 연관성을 고려해야 한다.
 
-호출하는 함수의 네이밍과 인자의 순서의 연관성을 고려하는 방법
+- 어떻게 파라미터의 순서의 연관성을 고려하는가?
+  - 매개변수가 2개가 넘지 않게 만든다.
+    - 함수의 파라미터는 무항인게 가장 좋고 만약 생성해야 한다면 2개 이하로만 생성하는 것을 지향해야 한다.
+  - 이미 다수의 파라미터가 생성된 함수가 있다면?
+    - 파라미터가 많아지는 등의 상황이 발생하면 함수 이름에 인수를 포함해서 순서 등을 명시해주는 것도 좋다. → 이 내용에 대한 공부 필요 , `cleanCode chapter 3`
+    - 파라미터를 객체로 변경하여 넘기는것
+    - 랩핑 함수를 만드는것
+  - 규칙적이지 않는 매개변수가 들어온다면 `argument` 객체 나 `rest parameter`를 고려한다.
+    - argument
+      - `arguments` 객체는 모든 함수 내에서 이용 가능한 지역 변수입니다. 
+        `arguments` 객체를 사용하여 함수 내에서 모든 인수를 참조할 수 있으며,
+        호출할 때 제공한 인수 각각에 대한 항목을 갖고 있습니다. 항목의 인덱스는 0부터 시작합니다.
+            ```jsx
+            const func = (arg1 , arg2 ,arg3) => {
+            	coonsole.log(arguments[0]);
+            	coonsole.log(arguments[1]);
+            	coonsole.log(arguments[2]);
+            }
+            func(1,2,3)
+            // result : 1,2,3
+            ```
+    - rest parameter(나머지 매개변수 , three dot operator)
+      - **나머지 매개변수** : 구문을 사용하면 함수가 정해지지 않은 수의 매개변수를 배열로 받을 수 있습니다.
+      ```jsx
+      const sum = (...restParamter) => {
+        return restParamter.reduce((previous, current) => {
+          return previous + current;
+        });
+      };
 
-- 매개변수가 2개가 넘지 않게 만든다
-
-- 규칙적이지 않는 매개변수가 들어온다면 argument 객체 나 rest parameter를 고려한다.
-
-- 이미만든 함수가 있다면 랩핑하는 함수를 만든다.
-
-- 만약 파라미터가 많아진다면 객체로 넘긴다
-
-클린코드에서의 매개변수 내용과 연관지어 기록하기
+      sum(1, 2, 3); // result : 6
+      sum(1, 2, 3, 4, 5); // result : 15
+      ```
 
 # Section 4. Forked Handling
 
