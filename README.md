@@ -466,6 +466,7 @@ Summary
 - 파라미터를 생성할 때 순서와 연관성을 고려해야 한다.
 
 - 어떻게 파라미터의 순서의 연관성을 고려하는가?
+
   - 매개변수가 2개가 넘지 않게 만든다.
     - 함수의 파라미터는 무항인게 가장 좋고 만약 생성해야 한다면 2개 이하로만 생성하는 것을 지향해야 한다.
   - 이미 다수의 파라미터가 생성된 함수가 있다면?
@@ -473,21 +474,16 @@ Summary
     - 파라미터를 객체로 변경하여 넘기는것
     - 랩핑 함수를 만드는것
   - 규칙적이지 않는 매개변수가 들어온다면 `argument` 객체 나 `rest parameter`를 고려한다.
+
     - argument
       - `arguments` 객체는 모든 함수 내에서 이용 가능한 지역 변수입니다. 
         `arguments` 객체를 사용하여 함수 내에서 모든 인수를 참조할 수 있으며,
         호출할 때 제공한 인수 각각에 대한 항목을 갖고 있습니다. 항목의 인덱스는 0부터 시작합니다.
-            ```jsx
-            const func = (arg1 , arg2 ,arg3) => {
-            	coonsole.log(arguments[0]);
-            	coonsole.log(arguments[1]);
-            	coonsole.log(arguments[2]);
-            }
-            func(1,2,3)
-            // result : 1,2,3
-            ```
+        `jsx const func = (arg1 , arg2 ,arg3) => { coonsole.log(arguments[0]); coonsole.log(arguments[1]); coonsole.log(arguments[2]); } func(1,2,3) // result : 1,2,3 `
     - rest parameter(나머지 매개변수 , three dot operator)
+
       - **나머지 매개변수** : 구문을 사용하면 함수가 정해지지 않은 수의 매개변수를 배열로 받을 수 있습니다.
+
       ```jsx
       const sum = (...restParamter) => {
         return restParamter.reduce((previous, current) => {
@@ -501,19 +497,35 @@ Summary
 
 # Section 4. Forked Handling
 
-## `값식문`
+## `Value Expression Statement(값식문)`
 
 [값식문에 대해 잘 정리된 velog](https://velog.io/@leebonggu12/JS%EB%B6%84%EA%B8%B0%EB%8B%A4%EB%A3%A8%EA%B8%B0%EA%B0%92%EC%8B%9D%EB%AC%B8)
 
-## `삼항연산자`
+## `Ternary Condition Operator(삼항 조건 연산자)`
 
-삼항연산자를 사용할 땐 일관성이 중요하다고 생각
+[필자가 참조한 삼항 연산자에 대한 벨로그](https://velog.io/@jangws/7.-%EC%82%BC%ED%95%AD%EC%97%B0%EC%82%B0%EC%9E%90-%EB%8B%A4%EB%A3%A8%EA%B8%B0)
 
-삼항연산자는 3개의 피연산자를 필요로 한다
+- 삼항연산자란?
 
-삼항연산자를 상ㅇ해서 값을 만들고 변수로 담아내거나 , 함수가 내뱉는 값이 바로 값을 내뱉는다면 사용함
+  - JS에서 유일하게 3개의 피연산자를 취할 수 있는 연산자이다.
 
-https://velog.io/@jangws/7.-%EC%82%BC%ED%95%AD%EC%97%B0%EC%82%B0%EC%9E%90-%EB%8B%A4%EB%A3%A8%EA%B8%B0
+    맨 앞에 조건문이 들어가고 , 그 뒤로 물음표화 조건이 참이라면 실행할 식 , 바로 뒤에 콜론( : ) 이 들어가며 조건이 거짓이라면 실행할 식이 들어간다.
+
+  - 보통 if 명령문의 단축 형태로 사용된다.
+
+  - 사용 예시
+
+    ```
+    const getFee = (isMember) => {
+        return (isMember ? '$2.00' : '$10.00');
+    }
+    ```
+
+- 삼항연산자를 사용할 땐 명확한 기준에 의한 일관성이 있어야한다.
+  - 삼항연산자를 중헙해서 여러번 사용할 경우 가독성이 떨어진다. 분기처리가 많다면 switch 문을 고려하라
+  - 삼항연산자를 중헙해서 사용한다면 우선순위를 명확히 알릴 수 있도록 소괄호() 로 감싸라
+  - 삼항연산자에 의해 값이 반환되지 않는 함수를 사용하는것은 억지 숏코딩에 불과할 수 있다. 차라리 if 문을 사용하라 -> 조금더 공부 필요(operator 의 본질에 대해 알아보면 되지 않을까?)
+  - 삼항연산자는 삼항연산자를 통해 값을 만들고 그 값을 변수로 담아낼 때 사용하는 것이 적절하다.
 
 ## `Truthy & Falsy`
 
