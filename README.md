@@ -639,10 +639,6 @@ JS는 Boolean 문맥에서 형 변환을 사용한다.
 
 <br />
 
-## `Nullish coalescing operator( null 병합 연산자 )`
-
-<br />
-
 ## `드모르간의 법칙`
 
 - 드모르간 법칙이란?
