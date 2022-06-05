@@ -538,13 +538,39 @@ JS는 Boolean 문맥에서 형 변환을 사용한다.
 
 ## `단축평가 (short-circut evoluation)`
 
-단축평가란?
+- 단축평가란?
 
-OR operator 와 AND operator 의 단축평가
+  - 논리 연산의 결과를 결정하는 피연산자를 **타입 변환하지 않고 그대로 반환한다.**
+    이를 단축 평가라 한다.
+    단축 평가는 표현식을 평가하는 도중에 평가 결과가 확정된 경우 나머지 평가 과정을 생략하는 것을 말한다.
 
-논리연산자만 잘 사용해도 코드가 줄어들고 , 가독성이 높아진다.
+  <br />
 
-강의를 다시 보면서 코드 작성해보기
+- 단축평가 살펴보기
+
+  - 논리 연산자를 사용한 단축 평가
+
+    - `논리합( || )` 혹은 `논리합( && )` 연산자 표현식은 언제나 2개 (혹은 그 이상의) 피연산자 중 어느 한쪽으로 평가된다.
+      - 논리곱(&&) 연산자는 두 개의 피연산자가 모두 true 로 평가될 때 true 를 반환하며 , 좌항에서 우항으로 진행된다.
+      ```jsx
+      console.log(true && false); // result : false
+      ```
+      - 논리합 연산자는 두개의 피연산자 중 하나만 true 로 평가되어도 true 를 반환하며 , 좌항에서 우항으로 진행된다.
+
+    <br />
+
+  - 옵셔널 체이닝(Optional chaning) 연산자
+
+    - 옵셔널 체이닝 연산자란?
+      - ?. 을 사용하여 옵셔널 체이닝 연산자를 선언한다.
+      - 옵셔널 체이닝 연산자는 좌항의 피연선자가 null or undefined 인 경우 undefined 를 반환하고 , 그렇지 않으면 우항으 프로퍼티 참조를 이어간다.
+
+  - Null 병합 연산자 (Nullish coalescing operator)
+    - null 병합 연산자란?
+      - ?? 을 사용 null 병합 연산자를 선언한다.
+      - 왼쪽 피연산자가 null 혹은 undefined 일 때 오른쪽 피연산자를 반환하고 ,
+        그렇지 않다면 왼쪽 피연산자를 반환한다.
+      - 주의점 : falsy 와 nullish 중 어떠한것을 사용하용해야할 지 고민하지 않고 nullish operator 만 사용하는 것을 지양해야 한다.
 
 ## `else / else if 피하기`
 
@@ -586,14 +612,6 @@ early return 을 사용하여 의존성을 끊을 수 있다.
 전위 연산자와 후위 연산자도 지양하는것이 좋음
 
 ## `Nullish coalescing operator( null 병합 연산자 )`
-
-정의 : null 과 undefined 만 필터링한다.
-단점 : falsy 와 nullish 중 어떠한것을 사용하용해야할 지 고민하지 않고 nullish operator 만 사용할 수도 있음.
-
-[MDN Nullish coalescing operator](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator)
-[Mordern Javascript Nullish coalescing operator](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator)
-
-주의점
 
 ## `드모르간의 법칙`
 
