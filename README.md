@@ -495,6 +495,18 @@ Summary
 
 # Section 4. Forked Handling
 
+Summary
+
+- Value Expression Statement
+- Ternary Condition Operator
+- Truthy & Falsy
+- Short-circut evoluation
+- Beware of using else & else-if statement
+- Early Return & condition of negate
+- Consider default case
+- Using explicit operators
+- De Morgan's Law in Javascript
+
 ## `Value Expression Statement(값식문)`
 
 [값식문에 대해 잘 정리된 velog](https://velog.io/@leebonggu12/JS%EB%B6%84%EA%B8%B0%EB%8B%A4%EB%A3%A8%EA%B8%B0%EA%B0%92%EC%8B%9D%EB%AC%B8)
