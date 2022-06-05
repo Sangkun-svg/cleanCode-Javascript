@@ -574,15 +574,20 @@ JS는 Boolean 문맥에서 형 변환을 사용한다.
 
 ## `else / else if 피하기`
 
-else if 문을 사용하는 경우는 조건에 대해서 명확함이 없는 상황일 경우가 큼
+- else , else-if 의 사용을 지양해야 하는 이유
 
-else if 를 최대한 지향하고 swich 문으로 변환하는걸 추천
+  - 변경, 확장이 될수록 코드가 복잡해져서 수정할 위치를 찾기가 어렵다.
+  - 실수로 추가하지 않고 누락하는 경우가 생긴다. 즉, 유지보수가 점점 어려워진다.
+  - 하나의 함수가 2가지의 기능을 할 때 else 문을 사용하면 원하지 않는 결과가 도출될 수 있다.
 
-아니먄 if 블록으로 쪼개서 else if 를 사용하지 않는방법도 있음
+<br />
 
-else 문을 한번만 사용할 경우는 사실 else에 필요도가 optional 한 경우이기 때문에 생략하여 가독성을 높이는걸 추천
+- else , else-if 를 지양하는 방법
+  - **while , switch** 으로 변경하여 사용하라
+  - if 문으로 작게 쪼개서 else-if 문을 피하라
+  - early return 을 사용하라
 
-하나의 함수가 2가지의 기능을 할 때 else 문을 사용하면 원하지 않는 결과가 도출될 수 있다.
+<br />
 
 ## `Early Return 과 부정 조건문 지양(beware of condition statement of negate )`
 
@@ -597,9 +602,13 @@ early return 을 사용하여 의존성을 끊을 수 있다.
 - early return 을 사용할 때
 - 보안 혹은 검사하는 로직일 때
 
+<br />
+
 ## `Default Case( Edge Case ) 고려하기`
 
 [엣지케이스에 관하여...](https://bakyeono.net/post/2015-05-02-edge-case-corner-case.html)
+
+<br />
 
 ## `명시적인 연산자 사용 지향하기`
 
@@ -611,7 +620,11 @@ early return 을 사용하여 의존성을 끊을 수 있다.
 
 전위 연산자와 후위 연산자도 지양하는것이 좋음
 
+<br />
+
 ## `Nullish coalescing operator( null 병합 연산자 )`
+
+<br />
 
 ## `드모르간의 법칙`
 
