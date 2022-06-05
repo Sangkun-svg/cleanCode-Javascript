@@ -11,8 +11,6 @@ Lecture : https://www.udemy.com/course/clean-code-js/
 
 # Section 1. About Variable
 
-# 변수 다루기
-
 **Summary**
 
 - `var를 지양하자`
