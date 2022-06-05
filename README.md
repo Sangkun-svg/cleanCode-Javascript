@@ -589,20 +589,37 @@ JS는 Boolean 문맥에서 형 변환을 사용한다.
 
 <br />
 
-## `Early Return 과 부정 조건문 지양(beware of condition statement of negate )`
+## `Early Return 과 부정 조건문`
 
-early return 을 사용하여 의존성을 끊을 수 있다.
+- early return이란?
 
-부정조건문을 지양하는 이유
+  - early return 는 함수를 작성하는 방식으로, 예상되는 긍정 결과가 함수의 끝에서 리턴되게 하고
+    조건이 맞지 않는 경우 나머지 코드는 (예외를 return 하거나 throw해서) 실행을 종료한다.
 
-- 생각을 여러번 해야할 수 있다.
+  - early return 을 사용하면 장점
+    - 들여쓰기의 깊이가 줄어들어 코드를 더욱 읽기 쉽게 만든다.
+    - 코드를 읽을 때 return 을 발견하면 더 아래쪽 코드를 확인하지 않아도 된다.
+    - 코드의 더 아래쪽에서 의도하지 않는 값의 변화를 방지할 수 있다.
 
-부정조건은 언제 사용하나?
+- 부정 조건문
 
-- early return 을 사용할 때
-- 보안 혹은 검사하는 로직일 때
+  - 부정조건문이란?
+  - 말 그대로 조건문 내의 값의 (boolean 타입) 반대값을 의미한다.
+  - 부정조건문을 지양해야 하는 이유 - 부정 조건문을 사용하면 생각을 거꾸로 해야되는 경우가 있어서 코드를 읽는데 혼란을 야기하기 쉽다.
+  - ```jsx
+    <예시>
 
-<br />
+    !isNaN;
+    isNotNaN;
+    !isEmpty;
+    isNotEmpty;
+    ```
+
+  - 부정조건문을 사용하는 경우
+    - early return 을 사용하는 경우
+    - 보안 혹은 검사 로직을 구현하는 경우
+
+  <br />
 
 ## `Default Case( Edge Case ) 고려하기`
 
