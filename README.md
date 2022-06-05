@@ -527,10 +527,10 @@ Summary
 
 ## `Truthy & Falsy`
 
-Truthy & Falsy 를 이용하면 if 문 내에 조건을 간단하게 변경할
-수 있다.
+- Truthy & Falsy 를 이용하면 if 문 내에 조건을 간단하게 변경할
+  수 있다.
 
-JS는 Boolean 문맥에서 형 변환을 사용한다.
+- JS는 Boolean 문맥에서 형 변환을 사용한다.
 
 - [about Truthy](https://developer.mozilla.org/ko/docs/Glossary/Truthy)
 
