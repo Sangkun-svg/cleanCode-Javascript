@@ -11,8 +11,6 @@ Lecture : https://www.udemy.com/course/clean-code-js/
 
 # Section 1. About Variable
 
-# 변수 다루기
-
 **Summary**
 
 - `var를 지양하자`
@@ -466,6 +464,7 @@ Summary
 - 파라미터를 생성할 때 순서와 연관성을 고려해야 한다.
 
 - 어떻게 파라미터의 순서의 연관성을 고려하는가?
+
   - 매개변수가 2개가 넘지 않게 만든다.
     - 함수의 파라미터는 무항인게 가장 좋고 만약 생성해야 한다면 2개 이하로만 생성하는 것을 지향해야 한다.
   - 이미 다수의 파라미터가 생성된 함수가 있다면?
@@ -473,21 +472,16 @@ Summary
     - 파라미터를 객체로 변경하여 넘기는것
     - 랩핑 함수를 만드는것
   - 규칙적이지 않는 매개변수가 들어온다면 `argument` 객체 나 `rest parameter`를 고려한다.
+
     - argument
       - `arguments` 객체는 모든 함수 내에서 이용 가능한 지역 변수입니다. 
         `arguments` 객체를 사용하여 함수 내에서 모든 인수를 참조할 수 있으며,
         호출할 때 제공한 인수 각각에 대한 항목을 갖고 있습니다. 항목의 인덱스는 0부터 시작합니다.
-            ```jsx
-            const func = (arg1 , arg2 ,arg3) => {
-            	coonsole.log(arguments[0]);
-            	coonsole.log(arguments[1]);
-            	coonsole.log(arguments[2]);
-            }
-            func(1,2,3)
-            // result : 1,2,3
-            ```
+        `jsx const func = (arg1 , arg2 ,arg3) => { coonsole.log(arguments[0]); coonsole.log(arguments[1]); coonsole.log(arguments[2]); } func(1,2,3) // result : 1,2,3 `
     - rest parameter(나머지 매개변수 , three dot operator)
+
       - **나머지 매개변수** : 구문을 사용하면 함수가 정해지지 않은 수의 매개변수를 배열로 받을 수 있습니다.
+
       ```jsx
       const sum = (...restParamter) => {
         return restParamter.reduce((previous, current) => {
@@ -501,99 +495,214 @@ Summary
 
 # Section 4. Forked Handling
 
-## `값식문`
+## `Value Expression Statement(값식문)`
 
 [값식문에 대해 잘 정리된 velog](https://velog.io/@leebonggu12/JS%EB%B6%84%EA%B8%B0%EB%8B%A4%EB%A3%A8%EA%B8%B0%EA%B0%92%EC%8B%9D%EB%AC%B8)
 
-## `삼항연산자`
+## `Ternary Condition Operator(삼항 조건 연산자)`
 
-삼항연산자를 사용할 땐 일관성이 중요하다고 생각
+[필자가 참조한 삼항 연산자에 대한 벨로그](https://velog.io/@jangws/7.-%EC%82%BC%ED%95%AD%EC%97%B0%EC%82%B0%EC%9E%90-%EB%8B%A4%EB%A3%A8%EA%B8%B0)
 
-삼항연산자는 3개의 피연산자를 필요로 한다
+- 삼항연산자란?
 
-삼항연산자를 상ㅇ해서 값을 만들고 변수로 담아내거나 , 함수가 내뱉는 값이 바로 값을 내뱉는다면 사용함
+  - JS에서 유일하게 3개의 피연산자를 취할 수 있는 연산자이다.
 
-https://velog.io/@jangws/7.-%EC%82%BC%ED%95%AD%EC%97%B0%EC%82%B0%EC%9E%90-%EB%8B%A4%EB%A3%A8%EA%B8%B0
+    맨 앞에 조건문이 들어가고 , 그 뒤로 물음표화 조건이 참이라면 실행할 식 , 바로 뒤에 콜론( : ) 이 들어가며 조건이 거짓이라면 실행할 식이 들어간다.
+
+  - 보통 if 명령문의 단축 형태로 사용된다.
+
+  - 사용 예시
+
+    ```
+    const getFee = (isMember) => {
+        return (isMember ? '$2.00' : '$10.00');
+    }
+    ```
+
+- 삼항연산자를 사용할 땐 명확한 기준에 의한 일관성이 있어야한다.
+  - 삼항연산자를 중첩해서 여러번 사용할 경우 가독성이 떨어진다. 분기처리가 많다면 switch 문을 고려하라
+  - 삼항연산자를 중첩해서 사용한다면 우선순위를 명확히 알릴 수 있도록 소괄호() 로 감싸라
+  - 삼항연산자에 의해 값이 반환되지 않는 함수를 사용하는것은 억지 숏코딩에 불과할 수 있다. 차라리 if 문을 사용하라 -> 조금더 공부 필요(operator 의 본질에 대해 알아보면 되지 않을까?)
+  - 삼항연산자는 삼항연산자를 통해 값을 만들고 그 값을 변수로 담아낼 때 사용하는 것이 적절하다.
 
 ## `Truthy & Falsy`
 
-Truthy : https://developer.mozilla.org/ko/docs/Glossary/Truthy
+- Truthy & Falsy 를 이용하면 if 문 내에 조건을 간단하게 변경할
+  수 있다.
 
-Falsy : https://developer.mozilla.org/ko/docs/Glossary/Falsy
+- JS는 Boolean 문맥에서 형 변환을 사용한다.
 
-굉장히 유용함
+- [about Truthy](https://developer.mozilla.org/ko/docs/Glossary/Truthy)
+
+- [about Falsy](https://developer.mozilla.org/ko/docs/Glossary/Falsy)
 
 ## `단축평가 (short-circut evoluation)`
 
-단축평가란?
+- 단축평가란?
 
-OR operator 와 AND operator 의 단축평가
+  - 논리 연산의 결과를 결정하는 피연산자를 **타입 변환하지 않고 그대로 반환한다.**
+    이를 단축 평가라 한다.
+    단축 평가는 표현식을 평가하는 도중에 평가 결과가 확정된 경우 나머지 평가 과정을 생략하는 것을 말한다.
 
-논리연산자만 잘 사용해도 코드가 줄어들고 , 가독성이 높아진다.
+  <br />
 
-강의를 다시 보면서 코드 작성해보기
+- 단축평가 살펴보기
+
+  - 논리 연산자를 사용한 단축 평가
+
+    - `논리합( || )` 혹은 `논리합( && )` 연산자 표현식은 언제나 2개 (혹은 그 이상의) 피연산자 중 어느 한쪽으로 평가된다.
+      - 논리곱(&&) 연산자는 두 개의 피연산자가 모두 true 로 평가될 때 true 를 반환하며 , 좌항에서 우항으로 진행된다.
+      ```jsx
+      console.log(true && false); // result : false
+      ```
+      - 논리합 연산자는 두개의 피연산자 중 하나만 true 로 평가되어도 true 를 반환하며 , 좌항에서 우항으로 진행된다.
+
+    <br />
+
+  - 옵셔널 체이닝(Optional chaning) 연산자
+
+    - 옵셔널 체이닝 연산자란?
+      - ?. 을 사용하여 옵셔널 체이닝 연산자를 선언한다.
+      - 옵셔널 체이닝 연산자는 좌항의 피연선자가 null or undefined 인 경우 undefined 를 반환하고 , 그렇지 않으면 우항으 프로퍼티 참조를 이어간다.
+
+  - Null 병합 연산자 (Nullish coalescing operator)
+    - null 병합 연산자란?
+      - ?? 을 사용 null 병합 연산자를 선언한다.
+      - 왼쪽 피연산자가 null 혹은 undefined 일 때 오른쪽 피연산자를 반환하고 ,
+        그렇지 않다면 왼쪽 피연산자를 반환한다.
+      - 주의점 : falsy 와 nullish 중 어떠한것을 사용하용해야할 지 고민하지 않고 nullish operator 만 사용하는 것을 지양해야 한다.
 
 ## `else / else if 피하기`
 
-else if 문을 사용하는 경우는 조건에 대해서 명확함이 없는 상황일 경우가 큼
+- else , else-if 의 사용을 지양해야 하는 이유
 
-else if 를 최대한 지향하고 swich 문으로 변환하는걸 추천
+  - 변경, 확장이 될수록 코드가 복잡해져서 수정할 위치를 찾기가 어렵다.
+  - 실수로 추가하지 않고 누락하는 경우가 생긴다. 즉, 유지보수가 점점 어려워진다.
+  - 하나의 함수가 2가지의 기능을 할 때 else 문을 사용하면 원하지 않는 결과가 도출될 수 있다.
 
-아니먄 if 블록으로 쪼개서 else if 를 사용하지 않는방법도 있음
+<br />
 
-else 문을 한번만 사용할 경우는 사실 else에 필요도가 optional 한 경우이기 때문에 생략하여 가독성을 높이는걸 추천
+- else , else-if 를 지양하는 방법
+  - **while , switch** 으로 변경하여 사용하라
+  - if 문으로 작게 쪼개서 else-if 문을 피하라
+  - early return 을 사용하라
 
-하나의 함수가 2가지의 기능을 할 때 else 문을 사용하면 원하지 않는 결과가 도출될 수 있다.
+<br />
 
-## `Early Return 과 부정 조건문 지양(beware of condition statement of negate )`
+## `Early Return 과 부정 조건문`
 
-early return 을 사용하여 의존성을 끊을 수 있다.
+- early return이란?
 
-부정조건문을 지양하는 이유
+  - early return 는 함수를 작성하는 방식으로, 예상되는 긍정 결과가 함수의 끝에서 리턴되게 하고
+    조건이 맞지 않는 경우 나머지 코드는 (예외를 return 하거나 throw해서) 실행을 종료한다.
 
-- 생각을 여러번 해야할 수 있다.
+  - early return 을 사용하면 장점
+    - 들여쓰기의 깊이가 줄어들어 코드를 더욱 읽기 쉽게 만든다.
+    - 코드를 읽을 때 return 을 발견하면 더 아래쪽 코드를 확인하지 않아도 된다.
+    - 코드의 더 아래쪽에서 의도하지 않는 값의 변화를 방지할 수 있다.
 
-부정조건은 언제 사용하나?
+- 부정 조건문
 
-- early return 을 사용할 때
-- 보안 혹은 검사하는 로직일 때
+  - 부정조건문이란?
+  - 말 그대로 조건문 내의 값의 (boolean 타입) 반대값을 의미한다.
+  - 부정조건문을 지양해야 하는 이유 - 부정 조건문을 사용하면 생각을 거꾸로 해야되는 경우가 있어서 코드를 읽는데 혼란을 야기하기 쉽다.
+  - ```jsx
+    <예시>
 
-## `Default Case( Edge Case ) 고려하기`
+    !isNaN;
+    isNotNaN;
+    !isEmpty;
+    isNotEmpty;
+    ```
 
-[엣지케이스에 관하여...](https://bakyeono.net/post/2015-05-02-edge-case-corner-case.html)
+  - 부정조건문을 사용하는 경우
+    - early return 을 사용하는 경우
+    - 보안 혹은 검사 로직을 구현하는 경우
+
+  <br />
+
+## `Default Case 고려하기`
+
+- 사용자의 실수를 예방하기 위해 Default Case를 고려하는 의식적인 노력이 필요하다.
+
+  함수에서 들어와야 할 인수가 전달되지 않을 경우 OR 연산자 혹은 기본값 매개변수(default function parameter)를 사용하여 안전하게 Default 값을 미리 설정해두는 방법이 권장된다.
+
+  예시
+
+  ```
+    // OR 연산자를 사용하여 기본값을 설정하는 경우
+      function multiply(a, b) {
+        a = 3
+        return a * b || 10; // result : 30
+      }
+
+    // 기본값 매개변수를 사용하여 기본값을 설정하는 경우
+      function multiply(a, b = 10) {
+        a = 3
+        return a * b;  // result : 30
+      }
+
+  ```
+
+<br />
 
 ## `명시적인 연산자 사용 지향하기`
 
-예측 가능하고 디버깅 하기 쉬운 코드를 짜기 위해 노력하자
+- 연산자를 사용할 땐 명시적으로 사용하는 것을 지향해야 한다.
 
-분기처리를 작성할 때도 도움이 많이 된다.
+  - 여기서 명시적이란 누가봐도 결과를 예측하기 쉽고 디버깅하기 쉬운 코드를 의미한다.
 
-연산자의 우선순위를 잘 판단하기 위해 () 로 표기해주면 가독성을 높일 수 있다.
+  - 명시적으로 표현을 하면 분기처리하기 쉬워지고 가독성이 올라간다.
 
-전위 연산자와 후위 연산자도 지양하는것이 좋음
+  - 다중으로 연산자를 사용하였을 때 소괄호() 로 표기해주면 명시적으로 보여진다.
 
-## `Nullish coalescing operator( null 병합 연산자 )`
+    ```
+      x + y * 3 - z
 
-정의 : null 과 undefined 만 필터링한다.
-단점 : falsy 와 nullish 중 어떠한것을 사용하용해야할 지 고민하지 않고 nullish operator 만 사용할 수도 있음.
+      (x + y) * (3 - z)
+    ```
 
-[MDN Nullish coalescing operator](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator)
-[Mordern Javascript Nullish coalescing operator](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator)
+  - 전위연산자나 후위연산자를 지양하는것이 코드의 가독성을 올려준다.
 
-주의점
+<br />
 
 ## `드모르간의 법칙`
 
-수학적인 표현식
+- 드모르간 법칙이란?
 
-```
-not (A or B)=(not A) and (not B)
-not (A and B)=(not A) or (not B)
-```
+  - 논리학과 수학의 법칙 중 하나이다. 논리 연산에서 논리합은 논리곱과 부정기호로, 논리곱은 논리합과 부정기호로 표현할 수 있음을 가리키는 법칙이다.
 
-JS에서의 표현식
+  - 수학적인 표현식
 
-```
-!(A || B) = !A && !B
-!(A and B) = !A || !B
-```
+    ```
+    not (A or B)=(not A) and (not B)
+    not (A and B)=(not A) or (not B)
+    ```
+
+  - JS에서의 표현식
+
+    ```
+    !(A || B) = !A && !B
+    !(A and B) = !A || !B
+    ```
+
+  - 드모르간의 법칙은 논리연산자를 사용할 때 적용된다.
+
+    만약 논리연사자를 사용할 때 논리연산자를 감싸여 부정연산자를 넣는 경우 아래와 같은 로직이 나온다.
+
+    이때 조건문에 더 많은 조건이 추가되면 가독성이 떨어지고 유지보수가 어려워지게 된다.
+
+    따라서 이와같은 상황에선 드로므간 법칙을 사용하는 것을 추천한다.
+
+    ```
+      // 드모르간 법칙 적용 전
+        if( !(isValid && isRegister) ){
+        something..
+      }
+
+
+      // 드모르간 법칙 적용 후
+      if( !isValid || !isRegister) {
+        something..
+      }
+    ```
