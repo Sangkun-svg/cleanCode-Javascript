@@ -621,9 +621,28 @@ JS는 Boolean 문맥에서 형 변환을 사용한다.
 
   <br />
 
-## `Default Case( Edge Case ) 고려하기`
+## `Default Case 고려하기`
 
-[엣지케이스에 관하여...](https://bakyeono.net/post/2015-05-02-edge-case-corner-case.html)
+- 사용자의 실수를 예방하기 위해 Default Case를 고려하는 의식적인 노력이 필요하다.
+
+  함수에서 들어와야 할 인수가 전달되지 않을 경우 OR 연산자 혹은 기본값 매개변수(default function parameter)를 사용하여 안전하게 Default 값을 미리 설정해두는 방법이 권장된다.
+
+  예시
+
+  ```
+    // OR 연산자를 사용하여 기본값을 설정하는 경우
+      function multiply(a, b) {
+        a = 3
+        return a * b || 10; // result : 30
+      }
+
+    // 기본값 매개변수를 사용하여 기본값을 설정하는 경우
+      function multiply(a, b = 10) {
+        a = 3
+        return a * b;  // result : 30
+      }
+
+  ```
 
 <br />
 
@@ -644,11 +663,14 @@ JS는 Boolean 문맥에서 형 변환을 사용한다.
 - 드모르간 법칙이란?
 
   - 논리학과 수학의 법칙 중 하나이다. 논리 연산에서 논리합은 논리곱과 부정기호로, 논리곱은 논리합과 부정기호로 표현할 수 있음을 가리키는 법칙이다.
+
   - 수학적인 표현식
+
     ```
     not (A or B)=(not A) and (not B)
     not (A and B)=(not A) or (not B)
     ```
+
   - JS에서의 표현식
 
     ```
