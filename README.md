@@ -509,7 +509,8 @@ Summary
 
 ## `Value Expression Statement(값식문)`
 
-[값식문에 대해 잘 정리된 velog](https://velog.io/@leebonggu12/JS%EB%B6%84%EA%B8%B0%EB%8B%A4%EB%A3%A8%EA%B8%B0%EA%B0%92%EC%8B%9D%EB%AC%B8)
+- 추후 고차함수 파트에서 한꺼번에 내용을 다룰 예정.
+  [값식문에 대해 잘 정리된 velog](https://velog.io/@leebonggu12/JS%EB%B6%84%EA%B8%B0%EB%8B%A4%EB%A3%A8%EA%B8%B0%EA%B0%92%EC%8B%9D%EB%AC%B8)
 
 ## `Ternary Condition Operator(삼항 조건 연산자)`
 
