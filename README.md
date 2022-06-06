@@ -720,6 +720,8 @@ Summary
       }
     ```
 
+<br /><br /><br />
+
 # Section 5. Array Handling
 
 Summary
@@ -730,104 +732,141 @@ Summary
 - Similar Array Objects
 - Immutability
 - Refactoring `for loop statement` to high-order function
+
+  → [Github](https://github.com/Sangkun-svg/cleanCode-Javascript/blob/master/Section%205.%20Array%20Handling/usingHighOrderFunction.js) Section 5. usingHighOrderFunction file 참고
+
 - Using method chaining in array
+
+  → [Github](https://github.com/Sangkun-svg/cleanCode-Javascript/blob/master/Section%205.%20Array%20Handling/usingHighOrderFunction.js) Section 5. usingHighOrderFunction file 참고
+
 - Map vs for-each
+
+<br />
 
 ## `Array is object in javascript`
 
-- Javascript의 배열은 객체와 굉장히 유사하다.
+- Javascript 에서는 배열도 객체이다.
 
-- 배열 확인 법
+  조금 특별한 형태의 객체라고 할 수 있다.
 
-  - instanceof → Object 로 햇을 때 트루시해서 안댐
-  - length → 문자열값도 렝스를 갖기 때문에 안댐
-  - in → ??
-  - typeof → Object 로 햇을 때 트루시해서 안댐
-  - Array.isArray( arr ) → 가장 최근에 나온 빌트인 메서드 , 추천함
+  다른 프로그래밍 언어에서의 배열과 비슷하게 동작한다.
 
-## `beware of using Array.length`
+- 배열을 확인하는 방법
 
-위험함
+  - Array.isArray() : 자바스크립트 객체가 배열인지 정확히 판별하는 방법
 
-arr.length 에 값을 할당하면 큰 문제가 있음
+<br />
 
-마지막 요소의 인덱스가 arr 의 길이가 됨
+## `Array.length`
 
-사용하는데 주의가 필요함
+- `Array.length` 는 배열의 길이를 반환한다.
 
-```
-const arr = [1,2,3]
-console.log(arr.length) // result : 3
+  아무 때나 `length` 속성에 값을 설정해 배열을 절단할 수 있다.
 
-arr.length = 10
-console.log(arr.length) // result : 10
-                        // arr [1,2,3, , , , , , , ]
+  `length` 속성으로 배열의 길이를 늘리면 실제 원소의 수가 증가하고 , 추가된 요소에는 `undefined` 가 할당된다.
 
+  따라서 함부로 배열의 길이를 수정하는 것은 주의해야 한다.
 
--- another --
+      const arr = [1,2,3]
+      console.log(arr.length) // result : 3
 
-const arr = [1,2,3]
-arr[3] = 4 // arr : [1,2,3,4]
+      arr.length = 10
+      console.log(arr.length) // result : 10
+      												// arr [1,2,3, , , , , , , ]
 
-arr[9] = 10 // arr : [1,2,3,4, , , , , ,10]
-console.log(arr.length) // result : 10
-```
+      -- another --
+
+      const arr = [1,2,3]
+      arr[3] = 4 // arr : [1,2,3,4]
+
+      arr[9] = 10 // arr : [1,2,3,4, , , , , ,10]
+      console.log(arr.length) // result : 10
+      ```
+
+      -- another --
+
+      const arr = [1,2,3]
+      arr[3] = 4 // arr : [1,2,3,4]
+
+      arr[9] = 10 // arr : [1,2,3,4, , , , , ,10]
+      console.log(arr.length) // result : 10
+
+<br />
 
 ## `Accessing Array Elements`
 
-배열 요소에 접근하기
+- `구조 분해 할당` 이란?
 
-배열 요소 = element →Ex. arr [1,2,3] : 요소 3개로 이루어진 배열
+  - `배열[]`이나 `객체{}`의 속성을 해체하여 그 값을 개별 변수에 담을 수 있게 하는 JavaScript 표현식이다
 
-배열 요소에 접근할 때는 arr[index] 의 형식으로 접근해야함 → 이렇게 요소에 접근하면 해당 인덱스가 무엇을 의미하는지 파악하기 어려워 가독성이 떨어진다.
+- 배열 요소에 접근할 때는 `arr[index]` 의 형식으로 접근해야한다.
 
--> 이를 해결하기 위해 변수 선언 및 할당 시 배열을 구조분해 할당하여 해당 배열 요소의 역할을 명시적으로 표현하면 가독성을 높힐 수 있다.
+  하지만 이렇게 요소에 접근하면 해당 인덱스가 무엇을 의미하는지 파악하기 어려워 가독성이 떨어진다.
 
-이 방식은 함수의 매개변수로 받을 때도 가능하다
+  배열을 구조분해 할당하여 해당 배열 요소의 역할을 명시적으로 표현하면 가독성을 높일 수 있다.
 
-혹은 유틸 라이브러리를 사용하는 방법도 있다.(Ex. lodash)
+  이 방식은 함수의 매개변수로 받을 때도 가능하다 .
 
-```
-const arr = [ 1, 2, 3]
-const [firstIndex, SecondIndex] = arr
-console.log(firstIndex , SecondIndex) // result : 1 ,2
+  ```jsx
+  const arr = [ 1, 2, 3]
+  const [firstIndex, SecondIndex] = arr
+  console.log(firstIndex , SecondIndex) // result : 1 ,2
 
-const testFunc = ([firstIndex , secondIndex] , name) => {
-  console.log(firstIndex., secondIndex, name);
-};
+      // 함수의 매개변수로 배열을 받을 때
+      const testFunc = ([firstIndex , secondIndex] , name) => {
+      	console.log(firstIndex., secondIndex, name);
+      };
 
-testFunc(arr , "sangkun"); // result : 1, 2, "sangkun"
-```
+      testFunc(arr , "sangkun"); // result : 1, 2, "sangkun"
+  ```
+
+- 혹은 util 라이브러리를 사용하는 방법도 있다. Ex. lodash
+
+<br />
 
 ## `Similar Array Objects`
 
-유사 배열 객체
+- 유사 배열 객체란?
 
-argument 는 js 함수 내부에서 가지고 있는 유사 배열 객체 중 대표 사례이다.
+  - 유사배열객체는 배열처럼 length 프로퍼티를 갖고 있지만 배열이 아닌 객체이다.
+
+  - argument 는 Js 함수 내부에서 가지고 있는 유사 배열 객체 중 대표 사례이다.
+
+    <br />
 
 ## `Immutability`
 
-불변성
+- immutable vs mutable
 
-순수 함수 , 변하지 않는 무언가를 만드는것을 지향하라 → 공부필요
+  - Js 에서는 불변성을 유지하는 값들과 그렇지 않은 값들이 나누어져 있다.
+
+    `Boolean`, `Number`, `String`, `null`, `undefined`, `Symbol` 과 같은 타입들은 불변성을 유지하는 타입들이고 `Object`타입들은 변경가능한 값이다.
+
+    즉 , 객체는 객체 내부의 값을 변경하면 객체를 참조하고 있는 다른 값들도 다 같이 변경된다는 의미이다.
+
+- 불변성이란?
+
+  - Js 에서는 불변성이란 객체가 생성된 이후 그 `상태`를 변경할 수 없는 것을 의미한다.
+
+    여기서 `상태`를 변경할 수 있는 것과 `값을 재할당하는 것`은 **_다르다_** 는 것을 알아야한다.
 
 - 배열의 불변성을 지키는 방법
-  - 배열을 복사한다.
-  - 새로운 배열을 반환하는 메서드를을 활용한다.
-    - filter , map , slice , 등등..
 
-https://velog.io/@jangws/17.-%EB%B6%88%EB%B3%80%EC%84%B1%EA%B3%BC-%EC%96%95%EC%9D%80-%EB%B3%B5%EC%82%AC-%EA%B9%8A%EC%9D%80-%EB%B3%B5%EC%82%AC
+  - 스프레드 연산자(three dot operator)를 활용한다.
+  - 새로운 배열을 반환하는 함수를 활용한다. - filter , map , slice , 등등..
+  - `immer` 라이브러리를 사용한다
+    - `immer` 란? : 편리한 방법으로 불변의 상태로 일할 수 있게 해주는 패키지이다.
 
-## `Refactoring for loop statement to high-order function && Using method chaining in array`
+  [Reference](https://velog.io/@co_mong/JS-%EB%B6%88%EB%B3%80%EC%84%B1Immutability)
 
-- usginHighOrderFunction.js 파일 참조
+    <br />
 
 ## `Map vs for-each statement`
 
-맵과 포이치의 차이를 알아야 한다.
+- map 과 for-each 의차이점
 
-차이점은 ?
-
-- return 의 유무
-  - for-each 는 undefined 를 반환하다. 요소마다 함수를 실행만 시켜줌 → 요소에 따라 함수만을 실행시켜야 할 때 사용하면 좋음
-  - map 은 새로운 배열을 반환한다. → 요소에 따라 원본 객체를 수정하지 않고 새로운 객체를 반환해야할 때 사용하면 좋다.
+  - return 의 유무
+    - `for-each` 의 반환값은 undefined 이다.
+      따라서 요소에 따라 함수만을 실행시켜야 할 때 사용하는 것을 추천한다.
+    - `map` 의 반환값은 새로운 배열이다.
+      따라서 요소에 따라 원본 객체를 수정하지 않고 새로운 객체를 반환해야할 때 사용하는 것을 추천한다.
