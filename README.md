@@ -572,7 +572,7 @@ Summary
 
     <br />
 
-  - 옵셔널 체이닝(Optional chaning) 연산자
+  - 옵셔널 체이닝(Optional chaining) 연산자
 
     - 옵셔널 체이닝 연산자란?
       - ?. 을 사용하여 옵셔널 체이닝 연산자를 선언한다.
@@ -719,3 +719,115 @@ Summary
         something..
       }
     ```
+
+# Section 5. Array Handling
+
+Summary
+
+- Array is object in javascript
+- Array.length
+- Accessing Array Elements
+- Similar Array Objects
+- Immutability
+- Refactoring `for loop statement` to high-order function
+- Using method chaining in array
+- Map vs for-each
+
+## `Array is object in javascript`
+
+- Javascript의 배열은 객체와 굉장히 유사하다.
+
+- 배열 확인 법
+
+  - instanceof → Object 로 햇을 때 트루시해서 안댐
+  - length → 문자열값도 렝스를 갖기 때문에 안댐
+  - in → ??
+  - typeof → Object 로 햇을 때 트루시해서 안댐
+  - Array.isArray( arr ) → 가장 최근에 나온 빌트인 메서드 , 추천함
+
+## `beware of using Array.length`
+
+위험함
+
+arr.length 에 값을 할당하면 큰 문제가 있음
+
+마지막 요소의 인덱스가 arr 의 길이가 됨
+
+사용하는데 주의가 필요함
+
+```
+const arr = [1,2,3]
+console.log(arr.length) // result : 3
+
+arr.length = 10
+console.log(arr.length) // result : 10
+                        // arr [1,2,3, , , , , , , ]
+
+
+-- another --
+
+const arr = [1,2,3]
+arr[3] = 4 // arr : [1,2,3,4]
+
+arr[9] = 10 // arr : [1,2,3,4, , , , , ,10]
+console.log(arr.length) // result : 10
+```
+
+## `Accessing Array Elements`
+
+배열 요소에 접근하기
+
+배열 요소 = element →Ex. arr [1,2,3] : 요소 3개로 이루어진 배열
+
+배열 요소에 접근할 때는 arr[index] 의 형식으로 접근해야함 → 이렇게 요소에 접근하면 해당 인덱스가 무엇을 의미하는지 파악하기 어려워 가독성이 떨어진다.
+
+-> 이를 해결하기 위해 변수 선언 및 할당 시 배열을 구조분해 할당하여 해당 배열 요소의 역할을 명시적으로 표현하면 가독성을 높힐 수 있다.
+
+이 방식은 함수의 매개변수로 받을 때도 가능하다
+
+혹은 유틸 라이브러리를 사용하는 방법도 있다.(Ex. lodash)
+
+```
+const arr = [ 1, 2, 3]
+const [firstIndex, SecondIndex] = arr
+console.log(firstIndex , SecondIndex) // result : 1 ,2
+
+const testFunc = ([firstIndex , secondIndex] , name) => {
+  console.log(firstIndex., secondIndex, name);
+};
+
+testFunc(arr , "sangkun"); // result : 1, 2, "sangkun"
+```
+
+## `Similar Array Objects`
+
+유사 배열 객체
+
+argument 는 js 함수 내부에서 가지고 있는 유사 배열 객체 중 대표 사례이다.
+
+## `Immutability`
+
+불변성
+
+순수 함수 , 변하지 않는 무언가를 만드는것을 지향하라 → 공부필요
+
+- 배열의 불변성을 지키는 방법
+  - 배열을 복사한다.
+  - 새로운 배열을 반환하는 메서드를을 활용한다.
+    - filter , map , slice , 등등..
+
+https://velog.io/@jangws/17.-%EB%B6%88%EB%B3%80%EC%84%B1%EA%B3%BC-%EC%96%95%EC%9D%80-%EB%B3%B5%EC%82%AC-%EA%B9%8A%EC%9D%80-%EB%B3%B5%EC%82%AC
+
+## `Refactoring for loop statement to high-order function && Using method chaining in array`
+
+- usginHighOrderFunction.js 파일 참조
+
+## `Map vs for-each statement`
+
+맵과 포이치의 차이를 알아야 한다.
+
+차이점은 ?
+
+- return 의 유무
+  - for-each 는 undefined 를 반환하다. 요소마다 함수를 실행만 시켜줌 → 요소에 따라 함수만을 실행시켜야 할 때 사용하면 좋음
+  - map 은 새로운 배열을 반환한다. → 요소에 따라 원본 객체를 수정하지 않고 새로운 객체를 반환해야할 때 사용하면 좋다.
