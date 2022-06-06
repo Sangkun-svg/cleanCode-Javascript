@@ -728,6 +728,7 @@ Summary
 - Array.length
 - Accessing Array Elements
 - Similar Array Objects
+- Immutability
 - Refactoring `for loop statement` to high-order function
 - Using method chaining in array
 - Map vs for-each
@@ -798,3 +799,20 @@ const testFunc = ([firstIndex , secondIndex] , name) => {
 
 testFunc(arr , "sangkun"); // result : 1, 2, "sangkun"
 ```
+
+## `Similar Array Objects`
+
+유사 배열 객체
+
+argument 는 js 함수 내부에서 가지고 있는 유사 배열 객체 중 대표 사례이다.
+
+## `Immutability`
+
+불변성
+
+순수 함수 , 변하지 않는 무언가를 만드는것을 지향하라 → 공부필요
+
+- 배열의 불변성을 지키는 방법
+  - 배열을 복사한다.
+  - 새로운 배열을 반환하는 메서드를을 활용한다.
+    - filter , map , slice , 등등..
