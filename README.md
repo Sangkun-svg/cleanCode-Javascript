@@ -572,7 +572,7 @@ Summary
 
     <br />
 
-  - 옵셔널 체이닝(Optional chaning) 연산자
+  - 옵셔널 체이닝(Optional chaining) 연산자
 
     - 옵셔널 체이닝 연산자란?
       - ?. 을 사용하여 옵셔널 체이닝 연산자를 선언한다.
