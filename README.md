@@ -816,3 +816,9 @@ argument 는 js 함수 내부에서 가지고 있는 유사 배열 객체 중 �
   - 배열을 복사한다.
   - 새로운 배열을 반환하는 메서드를을 활용한다.
     - filter , map , slice , 등등..
+
+https://velog.io/@jangws/17.-%EB%B6%88%EB%B3%80%EC%84%B1%EA%B3%BC-%EC%96%95%EC%9D%80-%EB%B3%B5%EC%82%AC-%EA%B9%8A%EC%9D%80-%EB%B3%B5%EC%82%AC
+
+## `Refactoring for loop statement to high-order function && Using method chaining in array`
+
+- usginHighOrderFunction.js 파일 참조
