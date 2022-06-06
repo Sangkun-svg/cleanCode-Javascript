@@ -746,3 +746,29 @@ Summary
   - Array.isArray( arr ) → 가장 최근에 나온 빌트인 메서드 , 추천함
 
 ## `beware of using Array.length`
+
+위험함
+
+arr.length 에 값을 할당하면 큰 문제가 있음
+
+마지막 요소의 인덱스가 arr 의 길이가 됨
+
+사용하는데 주의가 필요함
+
+```
+const arr = [1,2,3]
+console.log(arr.length) // result : 3
+
+arr.length = 10
+console.log(arr.length) // result : 10
+                        // arr [1,2,3, , , , , , , ]
+
+
+-- another --
+
+const arr = [1,2,3]
+arr[3] = 4 // arr : [1,2,3,4]
+
+arr[9] = 10 // arr : [1,2,3,4, , , , , ,10]
+console.log(arr.length) // result : 10
+```
