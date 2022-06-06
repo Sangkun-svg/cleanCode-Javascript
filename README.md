@@ -732,7 +732,6 @@ Summary
 - Refactoring `for loop statement` to high-order function
 - Using method chaining in array
 - Map vs for-each
-- Continue & Break
 
 ## `Array is object in javascript`
 
