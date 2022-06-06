@@ -822,3 +822,13 @@ https://velog.io/@jangws/17.-%EB%B6%88%EB%B3%80%EC%84%B1%EA%B3%BC-%EC%96%95%EC%9
 ## `Refactoring for loop statement to high-order function && Using method chaining in array`
 
 - usginHighOrderFunction.js 파일 참조
+
+## `Map vs for-each statement`
+
+맵과 포이치의 차이를 알아야 한다.
+
+차이점은 ?
+
+- return 의 유무
+  - for-each 는 undefined 를 반환하다. 요소마다 함수를 실행만 시켜줌 → 요소에 따라 함수만을 실행시켜야 할 때 사용하면 좋음
+  - map 은 새로운 배열을 반환한다. → 요소에 따라 원본 객체를 수정하지 않고 새로운 객체를 반환해야할 때 사용하면 좋다.
