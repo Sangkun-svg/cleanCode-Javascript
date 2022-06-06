@@ -719,3 +719,30 @@ Summary
         something..
       }
     ```
+
+# Section 5. Array Handling
+
+Summary
+
+- Array is object in javascript
+- Array.length
+- Accessing Array Elements
+- Similar Array Objects
+- Refactoring `for loop statement` to high-order function
+- Using method chaining in array
+- Map vs for-each
+- Continue & Break
+
+## `Array is object in javascript`
+
+- Javascript의 배열은 객체와 굉장히 유사하다.
+
+- 배열 확인 법
+
+  - instanceof → Object 로 햇을 때 트루시해서 안댐
+  - length → 문자열값도 렝스를 갖기 때문에 안댐
+  - in → ??
+  - typeof → Object 로 햇을 때 트루시해서 안댐
+  - Array.isArray( arr ) → 가장 최근에 나온 빌트인 메서드 , 추천함
+
+## `beware of using Array.length`
