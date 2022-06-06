@@ -342,9 +342,9 @@ JavaScript 에서의 타입
 
       - null 은 undefined 와 유사하게 타입임과 동시에 값이다. 하지만 null 의 타입검사를 결과는 Object 이다. 이건 JS 에서 인정한 버그이다.
 
-      ```jsx
-      typeof null; // result : Object
-      ```
+        ```jsx
+        typeof null; // result : Object
+        ```
 
       - 그렇다면 null 타입 체크는 어떻게 해야하는가?
 
@@ -359,11 +359,6 @@ JavaScript 에서의 타입
 - `Convention`
 
   - undefined 와 null 은 혼잡한 개념이 많기 때문에 팀 혹은 개인 별 convention 을 정의해놓고 사용하면 혼란을 방지할 수 있다.
-  - 임의로 생성해보는 컨벤션
-
-  ```jsx
-
-  ```
 
 <br/><br/><br/>
 
@@ -526,10 +521,10 @@ Summary
 
   - 사용 예시
 
-    ```
+    ```jsx
     const getFee = (isMember) => {
-        return (isMember ? '$2.00' : '$10.00');
-    }
+      return isMember ? "$2.00" : "$10.00";
+    };
     ```
 
 - 삼항연산자를 사용할 땐 명확한 기준에 의한 일관성이 있어야한다.
@@ -642,19 +637,18 @@ Summary
 
   예시
 
-  ```
-    // OR 연산자를 사용하여 기본값을 설정하는 경우
-      function multiply(a, b) {
-        a = 3
-        return a * b || 10; // result : 30
-      }
+  ```jsx
+  // OR 연산자를 사용하여 기본값을 설정하는 경우
+  function multiply(a, b) {
+    a = 3;
+    return a * b || 10; // result : 30
+  }
 
-    // 기본값 매개변수를 사용하여 기본값을 설정하는 경우
-      function multiply(a, b = 10) {
-        a = 3
-        return a * b;  // result : 30
-      }
-
+  // 기본값 매개변수를 사용하여 기본값을 설정하는 경우
+  function multiply(a, b = 10) {
+    a = 3;
+    return a * b; // result : 30
+  }
   ```
 
 <br />
@@ -669,10 +663,8 @@ Summary
 
   - 다중으로 연산자를 사용하였을 때 소괄호() 로 표기해주면 명시적으로 보여진다.
 
-    ```
-      x + y * 3 - z
-
-      (x + y) * (3 - z)
+    ```jsx
+    x + y * 3 - z(x + y) * (3 - z);
     ```
 
   - 전위연산자나 후위연산자를 지양하는것이 코드의 가독성을 올려준다.
@@ -687,14 +679,14 @@ Summary
 
   - 수학적인 표현식
 
-    ```
+    ```jsx
     not (A or B)=(not A) and (not B)
     not (A and B)=(not A) or (not B)
     ```
 
   - JS에서의 표현식
 
-    ```
+    ```jsx
     !(A || B) = !A && !B
     !(A and B) = !A || !B
     ```
@@ -707,7 +699,7 @@ Summary
 
     따라서 이와같은 상황에선 드로므간 법칙을 사용하는 것을 추천한다.
 
-    ```
+    ```jsx
       // 드모르간 법칙 적용 전
         if( !(isValid && isRegister) ){
         something..
@@ -767,31 +759,24 @@ Summary
 
   따라서 함부로 배열의 길이를 수정하는 것은 주의해야 한다.
 
-      const arr = [1,2,3]
-      console.log(arr.length) // result : 3
+  ```jsx
+  const arr = [1,2,3]
+  console.log(arr.length) // result : 3
 
-      arr.length = 10
-      console.log(arr.length) // result : 10
-      												// arr [1,2,3, , , , , , , ]
+  arr.length = 10
+  console.log(arr.length) // result : 10
+                          // arr [1,2,3, , , , , , , ]
 
-      -- another --
+  -- another --
 
-      const arr = [1,2,3]
-      arr[3] = 4 // arr : [1,2,3,4]
+  const arr = [1,2,3]
+  arr[3] = 4 // arr : [1,2,3,4]
 
-      arr[9] = 10 // arr : [1,2,3,4, , , , , ,10]
-      console.log(arr.length) // result : 10
-      ```
+  arr[9] = 10 // arr : [1,2,3,4, , , , , ,10]
+  console.log(arr.length) // result : 10
+  ```
 
-      -- another --
-
-      const arr = [1,2,3]
-      arr[3] = 4 // arr : [1,2,3,4]
-
-      arr[9] = 10 // arr : [1,2,3,4, , , , , ,10]
-      console.log(arr.length) // result : 10
-
-<br />
+  <br />
 
 ## `Accessing Array Elements`
 
