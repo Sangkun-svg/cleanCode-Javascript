@@ -772,3 +772,29 @@ arr[3] = 4 // arr : [1,2,3,4]
 arr[9] = 10 // arr : [1,2,3,4, , , , , ,10]
 console.log(arr.length) // result : 10
 ```
+
+## `Accessing Array Elements`
+
+배열 요소에 접근하기
+
+배열 요소 = element →Ex. arr [1,2,3] : 요소 3개로 이루어진 배열
+
+배열 요소에 접근할 때는 arr[index] 의 형식으로 접근해야함 → 이렇게 요소에 접근하면 해당 인덱스가 무엇을 의미하는지 파악하기 어려워 가독성이 떨어진다.
+
+-> 이를 해결하기 위해 변수 선언 및 할당 시 배열을 구조분해 할당하여 해당 배열 요소의 역할을 명시적으로 표현하면 가독성을 높힐 수 있다.
+
+이 방식은 함수의 매개변수로 받을 때도 가능하다
+
+혹은 유틸 라이브러리를 사용하는 방법도 있다.(Ex. lodash)
+
+```
+const arr = [ 1, 2, 3]
+const [firstIndex, SecondIndex] = arr
+console.log(firstIndex , SecondIndex) // result : 1 ,2
+
+const testFunc = ([firstIndex , secondIndex] , name) => {
+  console.log(firstIndex., secondIndex, name);
+};
+
+testFunc(arr , "sangkun"); // result : 1, 2, "sangkun"
+```
