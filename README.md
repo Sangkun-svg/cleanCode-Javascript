@@ -855,3 +855,228 @@ Summary
       따라서 요소에 따라 함수만을 실행시켜야 할 때 사용하는 것을 추천한다.
     - `map` 의 반환값은 새로운 배열이다.
       따라서 요소에 따라 원본 객체를 수정하지 않고 새로운 객체를 반환해야할 때 사용하는 것을 추천한다.
+
+<br /><br /><br />
+
+# Section 6. Object Handling
+
+Summary
+
+- Shorthand Properties
+- Computed Property name
+- Lookup table
+- Object desrtucturing
+- Object.freeze
+- beware of handling of Prototype
+- Has own property
+- ~~Optional chaining~~ **Creating..**
+- ~~Extends & Mixin~~ **Creating..**
+
+<br />
+
+## `Shorthand Properties`
+
+[단축 속성 - CSS: Cascading Style Sheets | MDN](https://developer.mozilla.org/ko/docs/Web/CSS/Shorthand_properties)
+
+- Shorthand Properties(단축 속성) 란?
+
+  - **단축 속성**은 서로 다른 여러 가지 CSS 속성의 값을 지정할 수 있는 CSS 속성이다.
+    단축 속성을 사용하면 간결하고 가독성이 높은 코드를 작성할 수 있다.
+  - JS에서의 shorthand properties 사용하기
+
+    - 키나 메서드(concise method)를 축약하여 사용할 수 있다.
+    - 예시
+
+      ```jsx
+      CSS
+
+      background-color: red;
+      background-url : images/bg.gif
+      background-repeat : no-repeat
+      background-position : top right
+
+      refactor...
+
+      background-color: red;
+      background: url(images/bg.gif) no-repeat top right;
+
+      /--------------/
+
+      JS
+
+      const firstName = 'popo'
+      const lastName = 'coco'
+
+      const person = {
+      	firstName : 'popo',
+      	lastName : 'coco',
+      	getFullName : function(){
+      		return this.firstName + ' ' + this.lastName
+      	}
+      }
+
+      refactor..
+
+      const person = {
+      	firstName,
+      	lastName,
+      	getFullName (){
+      		return this.firstName + ' ' + this.lastName
+      	}
+      }
+      ```
+
+<br />
+
+## `Computed Property name`
+
+- computed property name은 표현식을 이용해 객체의 key 값을 정의하는 문법이다.
+
+- 예시
+
+  ```jsx
+  const [state, setState] = useState({
+    id: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const {
+      target: { value, name },
+    } = e;
+    setState({
+      [name]: value,
+    });
+  };
+
+  return (
+    <>
+      <input value={state.id} name="name" onChange={handleChange} />
+      <input value={state.password} name="password" onChange={handleChange} />
+    </>
+  );
+  ```
+
+<br />
+
+## `Object Lookup table`
+
+배열 데이터 구조에서 키와 값으로 관리된 배열이 나열된 형태를 뜻한다.
+
+js 의 computed properties name 을 활용해 분기문을 줄일수 있음.
+
+switch 문이 길어질때 사용해보면 좋음
+
+- 예시
+
+  ```jsx
+  const getUserType = (type) => {
+    if (type === "Admin") {
+      return "관리자";
+    } else if (type === "Instructor") {
+      return "강사";
+    } else if (type === "Student") {
+      return "학생";
+    } else {
+      return "none";
+    }
+  };
+
+  // Refactor..
+
+  const getUserType2 = (type) => {
+    const USER_TYPE = {
+      Admin: "관리자",
+      Instructor: "강사",
+      Student: "학생",
+      None: "정보없음",
+    };
+    return USER_TYPE[type] ?? USER_TYPE.None;
+  };
+  ```
+
+<br />
+
+## `Object desrtucturing`
+
+객체 구조분해할당
+
+필수값에 대한 옵션처리
+
+배열을 객체로 구조분해할당하기
+
+```jsx
+const orders = ['first' , 'second' , 'third'];
+
+const start = orders[0]
+const end = orders[2]
+
+/--/
+
+const {0: start , 2: end} = orders
+start // result : 'first'
+end // result : 'third'
+```
+
+<br />
+
+## `Object.freeze`
+
+- object.freeze란 ?
+  : 사용하면 인자 안에 객체를 동결한다.
+- object.isFrozen이란?
+  : 동결이 잘되었는지 확인
+- Shallow copy vs deep copy
+  - freeze도 깊은 영역에 대해선 관여를 못한다.
+  - 중접된 freezing 을 해줘야한다.
+    - how ?
+      - 대중적인 라이브러리 → lodash
+      - 직접 유틸함수 생성 → 1. 객체 순회 2. 순회하며 객체인지 확인 3. 객체이면 재귀 4. 그렇지 않으면 Obj.freeze
+      - typescript 에서 readonly 사용
+
+<br />
+
+## `beware of handling Prototype`
+
+prototype 조작을 지양한다.
+
+이미 JS는 많이 발전햇다.
+
+JS 빌트인 객체는 건들지 말자.
+
+<br />
+
+## `Has own property`
+
+프로퍼티를 가졌는지를 확인하는 빌트인 함수
+
+```jsx
+const person = {
+  name: "Sangkun",
+  age: 23,
+};
+
+person.hasOwnProperty("name"); // true
+person.hasOwnProperty("age"); // true
+person.hasOwnProperty("job"); // false
+```
+
+hasOwnProperty 를 사용햇을 때 다른 키워드와 겹쳐져 사용될 수 있어서 객체의 prototype 의 call 메서드를 활용한 다음에 사용을 해야 안전하게 사용할 수 있음
+
+```jsx
+const foo = {
+  hasOwnProperty() {
+    return "hasOwnProperty";
+  },
+  bar: "bar",
+};
+
+foo.hasOwnProperty(bar); // result : hasOwnProperty
+Object.prototype.hasOwnProperty.call(foo, "bar"); // result : true
+```
+
+<br />
+
+## `beware of 직접 접근`
+
+추상화에 대한 내용
