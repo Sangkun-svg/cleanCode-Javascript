@@ -1080,3 +1080,137 @@ Object.prototype.hasOwnProperty.call(foo, "bar"); // result : true
 ## `beware of 직접 접근`
 
 추상화에 대한 내용
+
+<br /><br /><br />
+
+# Section 7. Function Handling
+
+Summary
+
+- Function , Method , Constructor
+- Argument & parameter
+- management complex parameter 복잡한 인자 관리
+- Default Value
+- Rest parameter
+- void & return
+- arrow function
+- Callback function
+- pure function
+- Closure
+
+<br />
+
+## `Function , Method , Constructor`
+
+- 함수
+  - 1급 객체로 작동하기 때문에 변수나 데이터에 담을 수 있다.
+  - 매개변수로 전달이 가능하다. (콜백함수)
+  - 함수가 함수를 반환한다.(고차함수)
+- 메서드
+  - 객체의 의존성이 있는 함수 , OOP 행동을 의미
+- 생성자 함수
+  - 인스턴스를 생성하는 역할 ( Class )
+
+<br />
+
+## `Argument & parameter`
+
+- parameter : 함수를 정의하는 측면에서 인자는 parameter , 매개변수라고 칭한다.
+- argument : 실제로 사용되는 측면에서의 인자는 argument , 인자 라고 칭한다.
+
+[Parameter - MDN Web Docs Glossary: Definitions of Web-related terms | MDN](https://developer.mozilla.org/en-US/docs/Glossary/Parameter)
+
+<br />
+
+## `management complex parameter`
+
+복잡한 인자 관리하기
+
+매개변수를 다룰때 맥락에 어울리는 매개변수를 설정하는게 중요
+
+<br />
+
+## `Default Value`
+
+들어오는 객체 인자가 없을 때 객체를 뱉는 법
+
+```jsx
+const generatePoint = ({ x = 0, y = 1 } = {}) => {
+  return { x, y };
+};
+
+generatePoint(); // result : {}
+generatePoint();
+```
+
+<br />
+
+## `Rest parameter`
+
+rest parameter 란?
+
+나머지 매개변수를 뜻함 ≠ 스프레드 연산자랑 완전히 다름
+
+나머지 매개변수는 항상 인자의 마지막 순서로 위치해야한다.
+
+나머지 매개변수는 배열로 판별된다. Array.isArray(args) ⇒ true
+
+<br />
+
+## `void & return`
+
+void : 함수에 반환이 없는걸 의미한다.
+
+JS는 아무런 리턴이 없을 때 undefined 를 리턴한다
+
+불필요한 리턴을 줄이자
+
+<br />
+
+## `Callback function`
+
+- 콜백함수란?
+
+콜백함수는 함수의 실행권을 다른 함수에 위임한다고 말할수도 있음.
+
+콜백함수를 넘길 땐 함수를 실행시키지 않고 함수 그대로를 넘겨야한다
+
+```jsx
+Ex
+
+// bad
+	function Func();
+	showModal("Message" , Func()); // 실행시켜서 넘긴 경우
+
+// good
+	function Func();
+	showModal("Message" , Func); // 실행시키지 않고 함수 자체를 넘긴 경우
+```
+
+<br />
+
+## `pure function`
+
+js 는 동적임 , 많은 부분이 동적으로 실행됨 , 주로 브라우저 위에서 다루게됨 , 사용자의 입력을 예측하고 제어하기 어려움
+
+순수 함수란?
+
+순수함수 유지하기
+
+- 모든 계산 값을 인자로 받는다
+
+<br />
+
+## `Closure`
+
+사실 다룰일이 없음.
+
+클로져란?
+
+왜 사용하는지
+
+장단점이 무엇인지
+
+메모리와 관련이 되었는지
+
+memorization code 작성해보기
