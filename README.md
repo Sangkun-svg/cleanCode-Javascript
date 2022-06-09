@@ -5,9 +5,11 @@
 <br />
 Lecture : https://www.udemy.com/course/clean-code-js/
 
-<br />
+<br /><br />
 
-[더 자세한 설명이 있는 Notion](https://root-dugout-9ef.notion.site/CleanCode-Javascript-7f2e1a0a443d4e719e05aeefb7ba244f)
+[더 자세한 설명이 있는 Notion<svg role="img" width="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Notion</title><path d="M4.459 4.208c.746.606 1.026.56 2.428.466l13.215-.793c.28 0 .047-.28-.046-.326L17.86 1.968c-.42-.326-.981-.7-2.055-.607L3.01 2.295c-.466.046-.56.28-.374.466zm.793 3.08v13.904c0 .747.373 1.027 1.214.98l14.523-.84c.841-.046.935-.56.935-1.167V6.354c0-.606-.233-.933-.748-.887l-15.177.887c-.56.047-.747.327-.747.933zm14.337.745c.093.42 0 .84-.42.888l-.7.14v10.264c-.608.327-1.168.514-1.635.514-.748 0-.935-.234-1.495-.933l-4.577-7.186v6.952L12.21 19s0 .84-1.168.84l-3.222.186c-.093-.186 0-.653.327-.746l.84-.233V9.854L7.822 9.76c-.094-.42.14-1.026.793-1.073l3.456-.233 4.764 7.279v-6.44l-1.215-.139c-.093-.514.28-.887.747-.933zM1.936 1.035l13.31-.98c1.634-.14 2.055-.047 3.082.7l4.249 2.986c.7.513.934.653.934 1.213v16.378c0 1.026-.373 1.634-1.68 1.726l-15.458.934c-.98.047-1.448-.093-1.962-.747l-3.129-4.06c-.56-.747-.793-1.306-.793-1.96V2.667c0-.839.374-1.54 1.447-1.632z"/> ](https://root-dugout-9ef.notion.site/CleanCode-Javascript-7f2e1a0a443d4e719e05aeefb7ba244f)
+
+<br /><br /><br />
 
 # Section 1. About Variable
 
@@ -1080,3 +1082,137 @@ Object.prototype.hasOwnProperty.call(foo, "bar"); // result : true
 ## `beware of 직접 접근`
 
 추상화에 대한 내용
+
+<br /><br /><br />
+
+# Section 7. Function Handling
+
+Summary
+
+- Function , Method , Constructor
+- Argument & parameter
+- management complex parameter 복잡한 인자 관리
+- Default Value
+- Rest parameter
+- void & return
+- arrow function
+- Callback function
+- pure function
+- Closure
+
+<br />
+
+## `Function , Method , Constructor`
+
+- 함수
+  - 1급 객체로 작동하기 때문에 변수나 데이터에 담을 수 있다.
+  - 매개변수로 전달이 가능하다. (콜백함수)
+  - 함수가 함수를 반환한다.(고차함수)
+- 메서드
+  - 객체의 의존성이 있는 함수 , OOP 행동을 의미
+- 생성자 함수
+  - 인스턴스를 생성하는 역할 ( Class )
+
+<br />
+
+## `Argument & parameter`
+
+- parameter : 함수를 정의하는 측면에서 인자는 parameter , 매개변수라고 칭한다.
+- argument : 실제로 사용되는 측면에서의 인자는 argument , 인자 라고 칭한다.
+
+[Parameter - MDN Web Docs Glossary: Definitions of Web-related terms | MDN](https://developer.mozilla.org/en-US/docs/Glossary/Parameter)
+
+<br />
+
+## `management complex parameter`
+
+복잡한 인자 관리하기
+
+매개변수를 다룰때 맥락에 어울리는 매개변수를 설정하는게 중요
+
+<br />
+
+## `Default Value`
+
+들어오는 객체 인자가 없을 때 객체를 뱉는 법
+
+```jsx
+const generatePoint = ({ x = 0, y = 1 } = {}) => {
+  return { x, y };
+};
+
+generatePoint(); // result : {}
+generatePoint();
+```
+
+<br />
+
+## `Rest parameter`
+
+rest parameter 란?
+
+나머지 매개변수를 뜻함 ≠ 스프레드 연산자랑 완전히 다름
+
+나머지 매개변수는 항상 인자의 마지막 순서로 위치해야한다.
+
+나머지 매개변수는 배열로 판별된다. Array.isArray(args) ⇒ true
+
+<br />
+
+## `void & return`
+
+void : 함수에 반환이 없는걸 의미한다.
+
+JS는 아무런 리턴이 없을 때 undefined 를 리턴한다
+
+불필요한 리턴을 줄이자
+
+<br />
+
+## `Callback function`
+
+- 콜백함수란?
+
+콜백함수는 함수의 실행권을 다른 함수에 위임한다고 말할수도 있음.
+
+콜백함수를 넘길 땐 함수를 실행시키지 않고 함수 그대로를 넘겨야한다
+
+```jsx
+Ex
+
+// bad
+	function Func();
+	showModal("Message" , Func()); // 실행시켜서 넘긴 경우
+
+// good
+	function Func();
+	showModal("Message" , Func); // 실행시키지 않고 함수 자체를 넘긴 경우
+```
+
+<br />
+
+## `pure function`
+
+js 는 동적임 , 많은 부분이 동적으로 실행됨 , 주로 브라우저 위에서 다루게됨 , 사용자의 입력을 예측하고 제어하기 어려움
+
+순수 함수란?
+
+순수함수 유지하기
+
+- 모든 계산 값을 인자로 받는다
+
+<br />
+
+## `Closure`
+
+사실 다룰일이 없음.
+
+클로져란?
+
+왜 사용하는지
+
+장단점이 무엇인지
+
+메모리와 관련이 되었는지
+
+memorization code 작성해보기
