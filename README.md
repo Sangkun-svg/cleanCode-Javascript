@@ -1109,9 +1109,13 @@ Summary
   - 매개변수로 전달이 가능하다. (콜백함수)
   - 함수가 함수를 반환한다.(고차함수)
 - 메서드
-  - 객체의 의존성이 있는 함수 , OOP 행동을 의미
+  - 메서드란?
+    - 객체의 프로퍼티에 할당된 함수 혹은 객체의 의존성이 있는 함수이다.
+  - OOP 행동을 의미한다.
 - 생성자 함수
-  - 인스턴스를 생성하는 역할 ( Class )
+  - 생성자 함수는 일반 함수와 기술적인 차이는 없지만 생성자 함수는 아래 두 관례를 따른다.
+    - 함수 이름의 첫 글자는 대문자로 시작합니다.
+    - 반드시 `'new'` 연산자를 붙여 실행합니다.
 
 <br />
 
@@ -1126,46 +1130,82 @@ Summary
 
 ## `management complex parameter`
 
-복잡한 인자 관리하기
+복잡한 인자를 관리하는 방법
 
-매개변수를 다룰때 맥락에 어울리는 매개변수를 설정하는게 중요
+- 무조건적으로 인자의 갯수를 줄이는 것 보단 맥락에 따라 인자를 설정하는것이 중요하다.
+- 구조분해 할당을 사용하는 것이 좋다.
+- 함수와 파라미터를 명시적으로 작성해야 한다.
 
 <br />
 
 ## `Default Value`
 
-들어오는 객체 인자가 없을 때 객체를 뱉는 법
+- 들어오는 객체 인자가 없을 때 객체를 뱉는 방법
 
-```jsx
-const generatePoint = ({ x = 0, y = 1 } = {}) => {
-  return { x, y };
-};
+  ```jsx
+  const addNum = (x = 0, y = 0) => {
+    return x + y;
+  };
 
-generatePoint(); // result : {}
-generatePoint();
-```
+  generatePoint(); // result : 0
+  generatePoint(2, 5); // result : 7
+  ```
 
-<br />
+  <br />
 
 ## `Rest parameter`
 
-rest parameter 란?
-
-나머지 매개변수를 뜻함 ≠ 스프레드 연산자랑 완전히 다름
-
-나머지 매개변수는 항상 인자의 마지막 순서로 위치해야한다.
-
-나머지 매개변수는 배열로 판별된다. Array.isArray(args) ⇒ true
+- rest parameter 란?
+  - 나머지 매개변수를 뜻한다. ≠ 스프레드 연산자랑 다른 개념이니 혼동을 주의해야 한다.
+  - 나머지 매개변수는 `생략 접두사(...)` 를 사용하여 특정 위치의 인수부터 마지막 인수까지를 한 번에 지정할 수 있습니다.
+  - 나머지 매개변수는 항상 인자의 마지막 순서로 위치해야한다.
+  - 나머지 매개변수는 배열로 판별된다.
+    ```jsx
+    const someFunc = (first, ...args) => {
+      Array.isArray(args); // result true
+    };
+    ```
 
 <br />
 
 ## `void & return`
 
-void : 함수에 반환이 없는걸 의미한다.
+- void 란?
+  - return 이 불필요한 함수( void func )에 return 을 사용하는 것을 지양해야 한다.
+  - 함수명으로 반환값을 유추할 수도 있으니 네이밍에 신경을 써야한다.
 
-JS는 아무런 리턴이 없을 때 undefined 를 리턴한다
+<br />
 
-불필요한 리턴을 줄이자
+## `arrow function`
+
+- 내부에서 arguments, call, apply, bind 함수 사용이 불가능하다.
+- 화살표 함수는 자신을 둘러싸고 있는 상위 환경의 this 를 그대로 계승하는 `Lexical this`를 따른다.
+- 생성자로 사용할 수 없다.
+- 메소드를 화살표 함수로 작성한다면, this 는 상위 환경의 this 를 계승하므로 전역 객체를 가리키게 된다.
+  하지만 본래 의도는 person 객체를 가리키는 것이었으므로 결과적으로 부자연스러운 동작이 된다.
+
+* 메서드를 prototype 에 할당해도 동일한 문제가 발생한다.
+
+  ```jsx
+  // method를 arrow function 으로 할당 할 경우
+  const person = {
+    name: "Sangkun",
+    sayHi: () => {
+      console.log(`Hi , ${this.name}`);
+    },
+  };
+
+  person.sayHi(); // result : Hi , undefined
+
+  //------//
+
+  // prototype 에 method를 arrow function으로 할당 할 경우
+  const person = {
+    name: "Sangkun",
+  };
+  Object.prototype.sayHi = () => console.log(`Hi ! ${this.name}`);
+  person.sayHi(); // result : Hi ! undefined
+  ```
 
 <br />
 
@@ -1173,39 +1213,40 @@ JS는 아무런 리턴이 없을 때 undefined 를 리턴한다
 
 - 콜백함수란?
 
-콜백함수는 함수의 실행권을 다른 함수에 위임한다고 말할수도 있음.
+  - JS의 비동기 처리를 하는 하나의 패턴이다.
+  - 콜백함수는 함수의 실행권을 다른 함수에 위임한다고 말할수도 있음.
+  - 콜백함수를 넘길 땐 함수를 실행시키지 않고 함수 그대로를 넘겨야한다.
 
-콜백함수를 넘길 땐 함수를 실행시키지 않고 함수 그대로를 넘겨야한다
+    ```jsx
+    Ex
 
-```jsx
-Ex
+    // bad
+      function Func();
+      showModal("Message" , Func()); // 실행시켜서 넘긴 경우
 
-// bad
-	function Func();
-	showModal("Message" , Func()); // 실행시켜서 넘긴 경우
-
-// good
-	function Func();
-	showModal("Message" , Func); // 실행시키지 않고 함수 자체를 넘긴 경우
-```
+    // good
+      function Func();
+      showModal("Message" , Func); // 실행시키지 않고 함수 자체를 넘긴 경우
+    ```
 
 <br />
 
 ## `pure function`
 
-js 는 동적임 , 많은 부분이 동적으로 실행됨 , 주로 브라우저 위에서 다루게됨 , 사용자의 입력을 예측하고 제어하기 어려움
+- 순수함수란 ?
 
-순수 함수란?
+  - 동일한 인자가 전달되면 항상 동일한 결과를 반환하는 함수(코드 블록)이다. 즉 , input 이 동일하면 output 도 동일한 함수이다.
+  - 순수함수는 side effect 를 일으키지 않는다.
 
-순수함수 유지하기
-
-- 모든 계산 값을 인자로 받는다
+- 순수 함수를 만들기 위해 지향해야 할 점
+  - 함수의 실행 순서에 영향을 받지 않아야 한다.
+  - 조합성(재사용성)이 높아야 한다.
+    - 순수함수는 예측이 가능한 결과를 반환하기 때문에 다른 함수들과 조합해서 사용하기 용이해야한다.
+  - 함수 외부의 어떤 데이터도 변경 시키지 않아야한다.
 
 <br />
 
 ## `Closure`
-
-사실 다룰일이 없음.
 
 클로져란?
 
@@ -1216,3 +1257,5 @@ js 는 동적임 , 많은 부분이 동적으로 실행됨 , 주로 브라우저
 메모리와 관련이 되었는지
 
 memorization code 작성해보기
+
+[Closure | PoiemaWeb](https://poiemaweb.com/js-closure)
