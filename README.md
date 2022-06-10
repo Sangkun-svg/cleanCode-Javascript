@@ -1117,6 +1117,7 @@ Summary
     - 함수 이름의 첫 글자는 대문자로 시작합니다.
     - 반드시 `'new'` 연산자를 붙여 실행합니다.
 
+
 <br />
 
 ## `Argument & parameter`
@@ -1135,6 +1136,7 @@ Summary
 - 무조건적으로 인자의 갯수를 줄이는 것 보단 맥락에 따라 인자를 설정하는것이 중요하다.
 - 구조분해 할당을 사용하는 것이 좋다.
 - 함수와 파라미터를 명시적으로 작성해야 한다.
+
 
 <br />
 
@@ -1207,6 +1209,7 @@ Summary
   person.sayHi(); // result : Hi ! undefined
   ```
 
+
 <br />
 
 ## `Callback function`
@@ -1229,6 +1232,7 @@ Summary
       showModal("Message" , Func); // 실행시키지 않고 함수 자체를 넘긴 경우
     ```
 
+
 <br />
 
 ## `pure function`
@@ -1244,6 +1248,7 @@ Summary
     - 순수함수는 예측이 가능한 결과를 반환하기 때문에 다른 함수들과 조합해서 사용하기 용이해야한다.
   - 함수 외부의 어떤 데이터도 변경 시키지 않아야한다.
 
+
 <br />
 
 ## `Closure`
@@ -1258,4 +1263,6 @@ Summary
 
 memorization code 작성해보기
 
+
 [Closure | PoiemaWeb](https://poiemaweb.com/js-closure)
+
