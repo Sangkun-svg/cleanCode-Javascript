@@ -871,8 +871,6 @@ Summary
 - Object.freeze
 - beware of handling of Prototype
 - Has own property
-- ~~Optional chaining~~ **Creating..**
-- ~~Extends & Mixin~~ **Creating..**
 
 <br />
 
@@ -884,9 +882,10 @@ Summary
 
   - **단축 속성**은 서로 다른 여러 가지 CSS 속성의 값을 지정할 수 있는 CSS 속성이다.
     단축 속성을 사용하면 간결하고 가독성이 높은 코드를 작성할 수 있다.
-  - JS에서의 shorthand properties 사용하기
 
-    - 키나 메서드(concise method)를 축약하여 사용할 수 있다.
+  - Javascript 에서 shorthand properties 사용하기
+
+    - key 나 method(concise method)를 축약하여 사용할 수 있다.
     - 예시
 
       ```jsx
@@ -917,7 +916,7 @@ Summary
       	}
       }
 
-      refactor..
+      refactor...
 
       const person = {
       	firstName,
@@ -1001,87 +1000,164 @@ switch 문이 길어질때 사용해보면 좋음
 
 ## `Object desrtucturing`
 
-객체 구조분해할당
+- **함수의 매개변수에 객체 구조분해할당**
 
-필수값에 대한 옵션처리
+  - 함수의 매개변수 를 객체로 받고, 인수를 객체로 전달한다면, 전달하는 매개변수 를 명시적으로 쓸 수 있으며 매개변수 의 key 만 같으면 되므로 매개변수 의 순서가 다르더라도 상관 없다.
 
-배열을 객체로 구조분해할당하기
+    ```jsx
+    const person = (name , age , location) => {
+    	return console.log(이름 ${name} , ${age} 살 , ${location} 거주);
+    }
 
-```jsx
-const orders = ['first' , 'second' , 'third'];
+    person("서울" , "sangkun", 23) // 이름 서울 , sangkun살 , 21거주
+    			// 인자와 파라미터의 순서와 다르면 예상하지 못한 결과값이 나온다
 
-const start = orders[0]
-const end = orders[2]
+    // refactor..
 
-/--/
+    const person = ({name , age , location}) => {
+    	return console.log(이름 ${name} , ${age} 살 , ${location} 거주);
+    }
 
-const {0: start , 2: end} = orders
-start // result : 'first'
-end // result : 'third'
-```
+    person({location : "서울" , name : "sangkun" , age : 23})
+    			// 이름 sangkun , 23살 , 서울 거주
+    			// 순서와 상관없이 예상한 결과값이 나온다.
+    ```
+
+- **함수의 매개변수 중 옵션 명시**
+
+  ```jsx
+  // name이 필수로 들어와야 하는 경우
+  const person = ({name , age , location}) => {
+  	if(!name) {
+  		throw new Error("Name cannot be null or undefined")
+  	}
+  	return "이름 ${name} , ${age} 살 , ${location} 거주";
+  }
+
+  person({})
+
+  // refactor..
+
+  const person = (**name** , { age , location}) => {
+  	return "이름 ${name} , ${age} 살 , ${location} 거주";
+  }
+
+  person({}) // error
+  ```
+
+- **배열에서도 객체 구조분해할당**
+
+  ```jsx
+  const orders = ["first", "second", "third"];
+
+  const st1 = orders[0];
+  const rd1 = orders[2];
+
+  console.log(st1); // first
+  console.log(rd1); // third
+
+  // refactor..
+
+  const { 0: st2, 2: rd2 } = orders; // 배열의 인덱스를 key로 객체구조분해할당한다
+
+  console.log(st2); // first
+  console.log(rd2); // third
+  ```
+
+  [참고한 블로그](https://velog.io/@jangws/20.-%EA%B0%9D%EC%B2%B4-%EA%B5%AC%EC%A1%B0%EB%B6%84%ED%95%B4%ED%95%A0%EB%8B%B9#object-destructuring-assignment%EA%B0%9D%EC%B2%B4-%EA%B5%AC%EC%A1%B0%EB%B6%84%ED%95%B4%ED%95%A0%EB%8B%B9)
 
 <br />
 
 ## `Object.freeze`
 
 - object.freeze란 ?
-  : 사용하면 인자 안에 객체를 동결한다.
-- object.isFrozen이란?
-  : 동결이 잘되었는지 확인
-- Shallow copy vs deep copy
-  - freeze도 깊은 영역에 대해선 관여를 못한다.
-  - 중접된 freezing 을 해줘야한다.
-    - how ?
-      - 대중적인 라이브러리 → lodash
-      - 직접 유틸함수 생성 → 1. 객체 순회 2. 순회하며 객체인지 확인 3. 객체이면 재귀 4. 그렇지 않으면 Obj.freeze
-      - typescript 에서 readonly 사용
 
-<br />
+  - `object.freeze` 메서드는 객체를 **동결**한다.
 
-## `beware of handling Prototype`
+    동결된 객체는 새로운 속성 추가 , 속성 제거 , 존재하는 속성의 값 변경 방지한다.
 
-prototype 조작을 지양한다.
+    또한, 동결 객체는 그 프로토타입이 변경되는것도 방지합니다.
 
-이미 JS는 많이 발전햇다.
+    `freeze()`는 전달된 동일한 객체를 반환한다.
 
-JS 빌트인 객체는 건들지 말자.
+  - `object.isFrozen` 메서드를 이용하여 객체가 동결 되었는지 확인할 수 있다.
+
+  <br />
+
+  - `Shallow freeze`
+
+    - 얉은 동결이란 ?
+
+      - 동결 메서드는 스스로의 직속 속성에만 적용되며, 동결 한 객체에만 속성 값 변경을 방지한다.
+
+        만약 그 객체의 프로퍼티가 객체라면, 그 객체(프로퍼티)는 동결되지 않고, 속성값 변경이 가능하다.
+
+  - `deep freeze`
+
+    - 깊은 동결이란 ?
+
+      - 객체의 불변하게 만드는 방법이다. 얉은 동결로는 객체를 완전히 불변하게 하지 못한다.
+
+    - 깊은동결을 하는 방법
+
+      - 라이브러리를 사용한다. Ex. lodash
+      - 직접 유틸함수를 생성하여 동결한다.
+
+        ```jsx
+        function deepFreeze(object) {
+          // 객체에 정의된 속성명을 추출
+          const propNames = Object.getOwnPropertyNames(object);
+
+          // 스스로를 동결하기 전에 속성을 동결
+          for (let name of propNames) {
+            let value = object[name];
+            object[name] =
+              value && typeof value === "object" ? deepFreeze(value) : value;
+          }
+          return Object.freeze(object);
+        }
+        ```
+
+        <br />
 
 <br />
 
 ## `Has own property`
 
-프로퍼티를 가졌는지를 확인하는 빌트인 함수
+- hasOwnProperty()란 ?
 
-```jsx
-const person = {
-  name: "Sangkun",
-  age: 23,
-};
+  - `hasOwnProperty` 메소드는 객체가 특정 프로퍼티를 가지고 있는지를 나타내는 boolean 값을 반환한다.
 
-person.hasOwnProperty("name"); // true
-person.hasOwnProperty("age"); // true
-person.hasOwnProperty("job"); // false
-```
+    ```jsx
+    const person = {
+      name: "Sangkun",
+      age: 23,
+    };
 
-hasOwnProperty 를 사용햇을 때 다른 키워드와 겹쳐져 사용될 수 있어서 객체의 prototype 의 call 메서드를 활용한 다음에 사용을 해야 안전하게 사용할 수 있음
+    person.hasOwnProperty("name"); // true
+    person.hasOwnProperty("age"); // true
+    person.hasOwnProperty("job"); // false
+    ```
 
-```jsx
-const foo = {
-  hasOwnProperty() {
-    return "hasOwnProperty";
-  },
-  bar: "bar",
-};
+  - 주의점
 
-foo.hasOwnProperty(bar); // result : hasOwnProperty
-Object.prototype.hasOwnProperty.call(foo, "bar"); // result : true
-```
+    - 자바스크립트는 프로퍼티 명칭으로서 `hasOwnProperty` 를 보호하지 않다.
 
-<br />
+      따라서 이 명칭을 사용하는 프로퍼티를 가지는 객체가 존재하려면 ,
 
-## `beware of 직접 접근`
+      올바른 결과들을 얻기 위해서는 외부 `hasOwnProperty` 를 사용해야합니다.
 
-추상화에 대한 내용
+      ```jsx
+      const foo = {
+        hasOwnProperty() {
+          return "hasOwnProperty";
+        },
+        bar: "bar",
+      };
+
+      foo.hasOwnProperty(bar); // result : hasOwnProperty
+      Object.prototype.hasOwnProperty.call(foo, "bar"); // result : true
+      ```
 
 <br /><br /><br />
 
@@ -1105,19 +1181,21 @@ Summary
 ## `Function , Method , Constructor`
 
 - 함수
+
   - 1급 객체로 작동하기 때문에 변수나 데이터에 담을 수 있다.
   - 매개변수로 전달이 가능하다. (콜백함수)
   - 함수가 함수를 반환한다.(고차함수)
+
 - 메서드
+
   - 메서드란?
     - 객체의 프로퍼티에 할당된 함수 혹은 객체의 의존성이 있는 함수이다.
   - OOP 행동을 의미한다.
-- 생성자 함수
-  - 생성자 함수는 일반 함수와 기술적인 차이는 없지만 생성자 함수는 아래 두 관례를 따른다. - 함수 이름의 첫 글자는 대문자로 시작합니다. - 반드시 `'new'` 연산자를 붙여 실행합니다.
-    <<<<<<< HEAD
-    =======
 
-> > > > > > > 579cfddec518b94a2e5e5f13daa31e090a21bdc2
+- 생성자 함수
+
+  - 생성자 함수는 일반 함수와 기술적인 차이는 없지만 생성자 함수는 아래 두 관례를 따른다. - 함수 이름의 첫 글자는 대문자로 시작합니다.
+  - 반드시 `'new'` 연산자를 붙여 실행합니다.
 
 <br />
 
@@ -1132,16 +1210,13 @@ Summary
 
 ## `management complex parameter`
 
-복잡한 인자를 관리하는 방법
+- 복잡한 인자를 관리하는 방법
 
-- 무조건적으로 인자의 갯수를 줄이는 것 보단 맥락에 따라 인자를 설정하는것이 중요하다.
-- 구조분해 할당을 사용하는 것이 좋다.
-- 함수와 파라미터를 명시적으로 작성해야 한다.
+  - 무조건적으로 인자의 갯수를 줄이는 것 보단 맥락에 따라 인자를 설정하는것이 중요하다.
+  - 구조분해 할당을 사용하는 것이 좋다.
+  - 함수와 파라미터를 명시적으로 작성해야 한다.
 
-# <<<<<<< HEAD
-
-> > > > > > > 579cfddec518b94a2e5e5f13daa31e090a21bdc2
-> > > > > > > <br />
+<br />
 
 ## `Default Value`
 
@@ -1212,10 +1287,6 @@ Summary
   person.sayHi(); // result : Hi ! undefined
   ```
 
-  # <<<<<<< HEAD
-
-> > > > > > > 579cfddec518b94a2e5e5f13daa31e090a21bdc2
-
 <br />
 
 ## `Callback function`
@@ -1226,8 +1297,8 @@ Summary
   - 콜백함수는 함수의 실행권을 다른 함수에 위임한다고 말할수도 있음.
   - 콜백함수를 넘길 땐 함수를 실행시키지 않고 함수 그대로를 넘겨야한다.
 
-        ```jsx
-        Ex
+    ````jsx
+    Ex
 
         // bad
           function Func();
@@ -1237,10 +1308,7 @@ Summary
           function Func();
           showModal("Message" , Func); // 실행시키지 않고 함수 자체를 넘긴 경우
         ```
-
-    # <<<<<<< HEAD
-
-> > > > > > > 579cfddec518b94a2e5e5f13daa31e090a21bdc2
+    ````
 
 <br />
 
