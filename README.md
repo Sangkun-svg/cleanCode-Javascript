@@ -1113,9 +1113,11 @@ Summary
     - 객체의 프로퍼티에 할당된 함수 혹은 객체의 의존성이 있는 함수이다.
   - OOP 행동을 의미한다.
 - 생성자 함수
-  - 생성자 함수는 일반 함수와 기술적인 차이는 없지만 생성자 함수는 아래 두 관례를 따른다.
-    - 함수 이름의 첫 글자는 대문자로 시작합니다.
-    - 반드시 `'new'` 연산자를 붙여 실행합니다.
+  - 생성자 함수는 일반 함수와 기술적인 차이는 없지만 생성자 함수는 아래 두 관례를 따른다. - 함수 이름의 첫 글자는 대문자로 시작합니다. - 반드시 `'new'` 연산자를 붙여 실행합니다.
+    <<<<<<< HEAD
+    =======
+
+> > > > > > > 579cfddec518b94a2e5e5f13daa31e090a21bdc2
 
 <br />
 
@@ -1136,7 +1138,10 @@ Summary
 - 구조분해 할당을 사용하는 것이 좋다.
 - 함수와 파라미터를 명시적으로 작성해야 한다.
 
-<br />
+# <<<<<<< HEAD
+
+> > > > > > > 579cfddec518b94a2e5e5f13daa31e090a21bdc2
+> > > > > > > <br />
 
 ## `Default Value`
 
@@ -1207,6 +1212,10 @@ Summary
   person.sayHi(); // result : Hi ! undefined
   ```
 
+  # <<<<<<< HEAD
+
+> > > > > > > 579cfddec518b94a2e5e5f13daa31e090a21bdc2
+
 <br />
 
 ## `Callback function`
@@ -1217,17 +1226,21 @@ Summary
   - 콜백함수는 함수의 실행권을 다른 함수에 위임한다고 말할수도 있음.
   - 콜백함수를 넘길 땐 함수를 실행시키지 않고 함수 그대로를 넘겨야한다.
 
-    ```jsx
-    Ex
+        ```jsx
+        Ex
 
-    // bad
-      function Func();
-      showModal("Message" , Func()); // 실행시켜서 넘긴 경우
+        // bad
+          function Func();
+          showModal("Message" , Func()); // 실행시켜서 넘긴 경우
 
-    // good
-      function Func();
-      showModal("Message" , Func); // 실행시키지 않고 함수 자체를 넘긴 경우
-    ```
+        // good
+          function Func();
+          showModal("Message" , Func); // 실행시키지 않고 함수 자체를 넘긴 경우
+        ```
+
+    # <<<<<<< HEAD
+
+> > > > > > > 579cfddec518b94a2e5e5f13daa31e090a21bdc2
 
 <br />
 
