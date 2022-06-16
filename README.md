@@ -1354,12 +1354,4 @@ Summary
 
 클로져란?
 
-왜 사용하는지
-
-장단점이 무엇인지
-
-메모리와 관련이 되었는지
-
-memorization code 작성해보기
-
 [Closure | PoiemaWeb](https://poiemaweb.com/js-closure)
